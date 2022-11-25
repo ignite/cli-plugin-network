@@ -29,7 +29,12 @@ func (p) Manifest() (plugin.Manifest, error) {
 }
 
 func (p) Execute(c plugin.ExecutedCommand) error {
-	os.Args = c.OSArgs
+	// Instead of a switch on c.Use, we run the root command like if
+	// we were in a command line context. This implies to set os.Args
+	// correctly.
+	// Remove the first arg "ignite" from OSArgs because our network
+	// command root is "network" not "ignite".
+	os.Args = c.OSArgs[1:]
 	return cmd.NewNetwork().Execute()
 }
 
