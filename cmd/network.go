@@ -325,12 +325,6 @@ func getKeyringDir(cmd *cobra.Command) string {
 	return keyringDir
 }
 
-func flagSetAccountPrefixes() *flag.FlagSet {
-	fs := flag.NewFlagSet("", flag.ContinueOnError)
-	fs.String(flagAddressPrefix, cosmosaccount.AccountPrefixCosmos, "account address prefix")
-	return fs
-}
-
 func getAddressPrefix(cmd *cobra.Command) string {
 	prefix, _ := cmd.Flags().GetString(flagAddressPrefix)
 	return prefix

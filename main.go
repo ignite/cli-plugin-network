@@ -3,12 +3,10 @@ package main
 import (
 	"encoding/gob"
 	"os"
-	"path/filepath"
 
 	hplugin "github.com/hashicorp/go-plugin"
 
 	"github.com/ignite/cli-plugin-network/cmd"
-	"github.com/ignite/cli/ignite/services/chain"
 	"github.com/ignite/cli/ignite/services/plugin"
 )
 
@@ -48,21 +46,6 @@ func (p) ExecuteHookPost(hook plugin.ExecutedHook) error {
 
 func (p) ExecuteHookCleanUp(hook plugin.ExecutedHook) error {
 	return nil
-}
-
-func getChain(cmd plugin.ExecutedCommand, chainOption ...chain.Option) (*chain.Chain, error) {
-	var (
-		home, _ = cmd.Flags().GetString("home")
-		path, _ = cmd.Flags().GetString("path")
-	)
-	if home != "" {
-		chainOption = append(chainOption, chain.HomePath(home))
-	}
-	absPath, err := filepath.Abs(path)
-	if err != nil {
-		return nil, err
-	}
-	return chain.New(absPath, chainOption...)
 }
 
 func main() {
