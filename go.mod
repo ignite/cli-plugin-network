@@ -2,8 +2,6 @@ module github.com/ignite/cli-plugin-network
 
 go 1.18
 
-replace github.com/ignite/cli => ../cli
-
 require (
 	cosmossdk.io/math v1.0.0-beta.3
 	github.com/aws/smithy-go v1.13.4
@@ -13,7 +11,7 @@ require (
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/goccy/go-yaml v1.9.6
 	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.25.3-0.20221123174849-4088a51d1614
+	github.com/ignite/cli v0.25.3-0.20221128073657-8f2d2009de35
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
