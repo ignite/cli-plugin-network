@@ -132,11 +132,14 @@ func networkChainPrepareHandler(cmd *cobra.Command, args []string) error {
 
 	session.Printf("%s Chain is prepared for launch\n", icons.OK)
 	session.Println("\nYou can start your node by running the following command:")
-	startCmd := "start"
+	commandStr := fmt.Sprintf("%s start --home %s", binaryName, chainHome)
 	if gitpod.IsOnGitpod() {
-		startCmd = "start-with-http-tunneling"
+		// Gitpod requires to enable proxy-tunnel tool
+		commandStr = fmt.Sprintf(
+			"ignite network tool proxy-tunnel %s/spn.yml & %s",
+			chainHome, commandStr,
+		)
 	}
-	commandStr := fmt.Sprintf("%s %s --home %s", binaryName, startCmd, chainHome)
 	session.Printf("\t%s/%s\n", binaryDir, colors.Info(commandStr))
 
 	return nil
