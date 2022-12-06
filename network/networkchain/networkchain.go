@@ -10,6 +10,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/tendermint/spn/pkg/chainid"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 	chainconfig "github.com/ignite/cli/ignite/config/chain"
@@ -197,7 +198,7 @@ func New(ctx context.Context, ar cosmosaccount.Registry, source SourceOption, op
 }
 
 func (c Chain) ChainID() (string, error) {
-	return c.chain.ChainID()
+	return chainid.NewGenesisChainID(c.Name(), 1), nil
 }
 
 func (c Chain) ID() (string, error) {

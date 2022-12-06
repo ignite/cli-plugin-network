@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
-	"github.com/ignite/cli/ignite/services/network/networktypes"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 var sampleCoins = sdk.NewCoins(sdk.NewCoin("bar", sdkmath.NewInt(1000)), sdk.NewCoin("foo", sdkmath.NewInt(2000)))

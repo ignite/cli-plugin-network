@@ -260,7 +260,7 @@ func (c Chain) updateConfigFromGenesisValidators(genesisVals []networktypes.Gene
 		tunnelAddresses []TunneledPeer
 	)
 	for i, val := range genesisVals {
-		if !cosmosutil.VerifyPeerFormat(val.Peer) {
+		if !networktypes.VerifyPeerFormat(val.Peer) {
 			return errors.Errorf("invalid peer: %s", val.Peer.Id)
 		}
 		switch conn := val.Peer.Connection.(type) {
