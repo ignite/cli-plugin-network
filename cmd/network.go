@@ -10,7 +10,7 @@ import (
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/chainconfig"
+	"github.com/ignite/cli/ignite/config"
 	"github.com/ignite/cli/ignite/pkg/cache"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
@@ -117,10 +117,10 @@ validators launch their nodes, a blockchain will be live.
 	}
 
 	// configure flags.
-	c.PersistentFlags().BoolVar(&local, flagLocal, false, "use local SPN network")
-	c.PersistentFlags().BoolVar(&nightly, flagNightly, false, "use nightly SPN network")
-	c.PersistentFlags().StringVar(&spnNodeAddress, flagSPNNodeAddress, spnNodeAddressNightly, "SPN node address")
-	c.PersistentFlags().StringVar(&spnFaucetAddress, flagSPNFaucetAddress, spnFaucetAddressNightly, "SPN faucet address")
+	c.PersistentFlags().BoolVar(&local, flagLocal, false, "use Ignite chain running locally")
+	c.PersistentFlags().BoolVar(&nightly, flagNightly, false, "use Ignite chain - nightly version")
+	c.PersistentFlags().StringVar(&spnNodeAddress, flagSPNNodeAddress, spnNodeAddressNightly, "set Ignite chain RPC address")
+	c.PersistentFlags().StringVar(&spnFaucetAddress, flagSPNFaucetAddress, spnFaucetAddressNightly, "set Ignite chain faucet address")
 
 	// add sub commands.
 	c.AddCommand(
@@ -262,7 +262,7 @@ func getNetworkCosmosClient(cmd *cobra.Command) (cosmosclient.Client, error) {
 }
 
 func newCache(cmd *cobra.Command) (cache.Storage, error) {
-	cacheRootDir, err := chainconfig.ConfigDirPath()
+	cacheRootDir, err := config.DirPath()
 	if err != nil {
 		return cache.Storage{}, err
 	}
