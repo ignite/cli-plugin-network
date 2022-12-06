@@ -46,7 +46,7 @@ const tunnelRerunDelay = 5 * time.Second
 func networkToolProxyTunnelHandler(cmd *cobra.Command, args []string) error {
 	spnConfig, err := networkchain.GetSPNConfig(args[0])
 	if err != nil {
-		return fmt.Errorf("Failed to open spn config file: %w", err)
+		return fmt.Errorf("failed to open spn config file: %w", err)
 	}
 	// exit if there aren't tunneled validators in the network
 	if len(spnConfig.TunneledPeers) == 0 {
