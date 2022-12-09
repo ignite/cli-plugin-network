@@ -3,15 +3,15 @@ module github.com/ignite/cli-plugin-network
 go 1.18
 
 require (
-	cosmossdk.io/math v1.0.0-beta.3
+	cosmossdk.io/math v1.0.0-beta.4
 	github.com/aws/smithy-go v1.13.4
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/cosmos/cosmos-sdk v0.46.6
 	github.com/cosmos/ibc-go/v5 v5.1.0
-	github.com/go-git/go-git/v5 v5.4.2
-	github.com/goccy/go-yaml v1.9.6
+	github.com/go-git/go-git/v5 v5.5.0
+	github.com/goccy/go-yaml v1.9.7
 	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.25.3-0.20221206104930-d8caa17a7a70
+	github.com/ignite/cli v0.25.3-0.20221209130424-11cf20cfa4f8
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
@@ -19,11 +19,11 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.1
-	github.com/tendermint/spn v0.2.1-0.20220921200247-8bafad876bdd
+	github.com/tendermint/spn v0.2.1-0.20221125172725-052fbf576cb2
 	github.com/tendermint/tendermint v0.34.23
 	github.com/vektra/mockery/v2 v2.15.0
 	golang.org/x/sync v0.1.0
-	google.golang.org/grpc v1.50.1
+	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.2-0.20220831092852-f930b1dc76e8
 )
 
@@ -36,7 +36,7 @@ require (
 	github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d // indirect
 	github.com/Microsoft/go-winio v0.6.0 // indirect
 	github.com/Microsoft/hcsshim v0.9.4 // indirect
-	github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 // indirect
+	github.com/ProtonMail/go-crypto v0.0.0-20221026131551-cf6655e29de4 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/alecthomas/chroma v0.8.2 // indirect
 	github.com/andrew-d/go-termutil v0.0.0-20150726205930-009166a695a2 // indirect
@@ -60,6 +60,7 @@ require (
 	github.com/charmbracelet/glow v1.4.1 // indirect
 	github.com/charmbracelet/lipgloss v0.6.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
+	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/confio/ics23/go v0.7.0 // indirect
 	github.com/containerd/cgroups v1.0.3 // indirect
 	github.com/containerd/console v1.0.3 // indirect
@@ -112,7 +113,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.0.1 // indirect
-	github.com/google/go-github/v48 v48.0.0 // indirect
+	github.com/google/go-github/v48 v48.1.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gookit/color v1.5.2 // indirect
@@ -162,8 +163,8 @@ require (
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/moby/moby v20.10.21+incompatible // indirect
-	github.com/moby/sys/mount v0.3.1 // indirect
-	github.com/moby/sys/mountinfo v0.6.0 // indirect
+	github.com/moby/sys/mount v0.3.3 // indirect
+	github.com/moby/sys/mountinfo v0.6.2 // indirect
 	github.com/mtibben/percent v0.2.1 // indirect
 	github.com/muesli/ansi v0.0.0-20211018074035-2e021307bc4b // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
@@ -180,6 +181,7 @@ require (
 	github.com/otiai10/copy v1.7.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.5 // indirect
 	github.com/petermattis/goid v0.0.0-20180202154549-b0b1615b78e5 // indirect
+	github.com/pjbgf/sha1cd v0.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_golang v1.12.2 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
@@ -198,6 +200,7 @@ require (
 	github.com/segmentio/ksuid v1.0.3 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
+	github.com/skeema/knownhosts v1.1.0 // indirect
 	github.com/sourcegraph/annotate v0.0.0-20160123013949-f4cad6c6324d // indirect
 	github.com/sourcegraph/syntaxhighlight v0.0.0-20170531221838-bd320f5d308e // indirect
 	github.com/spf13/afero v1.8.2 // indirect
@@ -219,7 +222,7 @@ require (
 	github.com/zondax/hid v0.9.1-0.20220302062450-5552068d2266 // indirect
 	go.etcd.io/bbolt v1.3.6 // indirect
 	go.opencensus.io v0.23.0 // indirect
-	golang.org/x/crypto v0.1.0 // indirect
+	golang.org/x/crypto v0.3.0 // indirect
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
 	golang.org/x/mod v0.7.0 // indirect
 	golang.org/x/net v0.2.0 // indirect
@@ -227,8 +230,8 @@ require (
 	golang.org/x/term v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/tools v0.3.0 // indirect
-	golang.org/x/xerrors v0.0.0-20220609144429-65e65417b02f // indirect
-	google.golang.org/genproto v0.0.0-20221014213838-99cd37c6964a // indirect
+	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
+	google.golang.org/genproto v0.0.0-20221114212237-e4508ebdbee1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
