@@ -14,7 +14,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 )
 
-// NewNetworkRequestAddAccount creates a new command to send add account request
+// NewNetworkRequestAddAccount creates a new command to send add account request.
 func NewNetworkRequestAddAccount() *cobra.Command {
 	c := &cobra.Command{
 		Use:   "add-account [launch-id] [address] [coins]",

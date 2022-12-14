@@ -9,7 +9,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 )
 
-// NewNetworkRequestRemoveValidator creates a new command to send remove validator request
+// NewNetworkRequestRemoveValidator creates a new command to send remove validator request.
 func NewNetworkRequestRemoveValidator() *cobra.Command {
 	c := &cobra.Command{
 		Use:   "remove-validator [launch-id] [address]",

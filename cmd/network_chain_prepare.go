@@ -10,6 +10,7 @@ import (
 	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli/ignite/pkg/cache"
+	"github.com/ignite/cli/ignite/pkg/chaincmd"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/colors"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
@@ -21,7 +22,7 @@ const (
 	flagForce = "force"
 )
 
-// NewNetworkChainPrepare returns a new command to prepare the chain for launch
+// NewNetworkChainPrepare returns a new command to prepare the chain for launch.
 func NewNetworkChainPrepare() *cobra.Command {
 	c := &cobra.Command{
 		Use:   "prepare [launch-id]",
@@ -98,7 +99,9 @@ func networkChainPrepareHandler(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("chain %d launch has not been triggered yet. use --force to prepare anyway", launchID)
 	}
 
-	var networkOptions []networkchain.Option
+	networkOptions := []networkchain.Option{
+		networkchain.WithKeyringBackend(chaincmd.KeyringBackendTest),
+	}
 
 	if flagGetCheckDependencies(cmd) {
 		networkOptions = append(networkOptions, networkchain.CheckDependencies())
@@ -145,7 +148,7 @@ func networkChainPrepareHandler(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// prepareFromGenesisInformation prepares the genesis of the chain from the queried genesis information from the launch ID of the chain
+// prepareFromGenesisInformation prepares the genesis of the chain from the queried genesis information from the launch ID of the chain.
 func prepareFromGenesisInformation(
 	cmd *cobra.Command,
 	cacheStorage cache.Storage,
