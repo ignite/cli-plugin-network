@@ -11,7 +11,7 @@ require (
 	github.com/go-git/go-git/v5 v5.5.0
 	github.com/goccy/go-yaml v1.9.7
 	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.25.3-0.20221214163709-63c7c7b925af
+	github.com/ignite/cli v0.25.3-0.20221216180535-bcbcd1d0bb57
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
@@ -231,7 +231,7 @@ require (
 	go.starlark.net v0.0.0-20220816155156-cfacd8902214 // indirect
 	golang.org/x/arch v0.0.0-20190927153633-4e8777c89be4 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
-	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
+	golang.org/x/exp v0.0.0-20221212164502-fae10dda9338 // indirect
 	golang.org/x/mod v0.7.0 // indirect
 	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect

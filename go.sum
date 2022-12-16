@@ -756,8 +756,8 @@ github.com/iancoleman/strcase v0.2.0 h1:05I4QRnGpI0m37iZQRuskXh+w77mr6Z41lwQzuHL
 github.com/iancoleman/strcase v0.2.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
-github.com/ignite/cli v0.25.3-0.20221214163709-63c7c7b925af h1:krfrE083NT/0ij+Kcwm/COE89ffnyAVlrZYRFaga5Ug=
-github.com/ignite/cli v0.25.3-0.20221214163709-63c7c7b925af/go.mod h1:hgCVMAvbowmf70pZZiCJUgSj8Mk+P8BqJSp8gL5eCWA=
+github.com/ignite/cli v0.25.3-0.20221216180535-bcbcd1d0bb57 h1:KYgSa36GfxhIS71nWp99/ttoa7McrfSpyoplx3veIX8=
+github.com/ignite/cli v0.25.3-0.20221216180535-bcbcd1d0bb57/go.mod h1:Dp0pX59gVacMwUJSyKe25JBb005YUcS6YoSrn7WzfwI=
 github.com/ignite/modules v0.0.0-20220912090139-7c325cae763a h1:0P8qg4YS0hb8jomZedhbooEKE3JZhRNAewV8+8otr6k=
 github.com/ignite/web v0.4.3 h1:LHucUEXttzCf5JmxO5/xLKVx1Qz1o124HqF4Nii5uWQ=
 github.com/ignite/web v0.4.3/go.mod h1:WZWBaBYF8RazN7dE462BLpvXDY8ScacxcJ07BKwX/jY=
@@ -1358,8 +1358,8 @@ golang.org/x/exp v0.0.0-20191227195350-da58074b4299/go.mod h1:2RIsYlXP63K8oxa1u0
 golang.org/x/exp v0.0.0-20200119233911-0405dc783f0a/go.mod h1:2RIsYlXP63K8oxa1u096TMicItID8zy7Y6sNkU49FU4=
 golang.org/x/exp v0.0.0-20200207192155-f17229e696bd/go.mod h1:J/WKrq2StrnmMY6+EHIKF9dgMWnmCNThgcyBT1FY9mM=
 golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6/go.mod h1:3jZMyOhIsHpP37uCMkUooju7aAi5cS1Q23tOzKc+0MU=
-golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e h1:+WEEuIdZHnUeJJmEUjyYC2gfUMj69yZXw17EnHg/otA=
-golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e/go.mod h1:Kr81I6Kryrl9sr8s2FK3vxD90NdsKWRuOIl2O4CvYbA=
+golang.org/x/exp v0.0.0-20221212164502-fae10dda9338 h1:OvjRkcNHnf6/W5FZXSxODbxwD+X7fspczG7Jn/xQVD4=
+golang.org/x/exp v0.0.0-20221212164502-fae10dda9338/go.mod h1:CxIveKay+FTh1D0yPZemJVgC/95VzuuOLq5Qi4xnoYc=
 golang.org/x/image v0.0.0-20190227222117-0694c2d4d067/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
 golang.org/x/image v0.0.0-20190802002840-cff245a6509b/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3/go.mod h1:UVdnD1Gm6xHRNCYTkRU2/jEulfH38KcIWyp/GAMgvoE=
