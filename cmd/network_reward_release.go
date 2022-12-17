@@ -5,11 +5,6 @@ import (
 	"fmt"
 	"text/tabwriter"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
-
-	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli-plugin-network/network/networktypes"
 	ignitecmd "github.com/ignite/cli/ignite/cmd"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
@@ -18,6 +13,11 @@ import (
 	"github.com/ignite/cli/ignite/pkg/relayer"
 	relayerconf "github.com/ignite/cli/ignite/pkg/relayer/config"
 	"github.com/ignite/cli/ignite/pkg/xurl"
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
+
+	"github.com/ignite/cli-plugin-network/network"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 const (

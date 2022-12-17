@@ -4,13 +4,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
-	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli/ignite/pkg/chaincmd"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/xos"
+	"github.com/spf13/cobra"
+
+	"github.com/ignite/cli-plugin-network/network/networkchain"
 )
 
 func newNetworkChainShowGenesis() *cobra.Command {

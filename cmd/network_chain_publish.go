@@ -5,15 +5,15 @@ import (
 	"os"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/cliui"
+	"github.com/ignite/cli/ignite/pkg/cliui/icons"
+	"github.com/ignite/cli/ignite/pkg/xurl"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/tendermint/spn/pkg/chainid"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
-	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/cliui/icons"
-	"github.com/ignite/cli/ignite/pkg/xurl"
 )
 
 const (

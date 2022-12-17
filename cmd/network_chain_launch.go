@@ -4,10 +4,10 @@ import (
 	"time"
 
 	timeparser "github.com/aws/smithy-go/time"
+	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli/ignite/pkg/cliui"
 )
 
 const (

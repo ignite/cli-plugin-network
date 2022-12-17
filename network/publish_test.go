@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	campaigntypes "github.com/tendermint/spn/x/campaign/types"
@@ -17,7 +18,6 @@ import (
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli-plugin-network/network/testutil"
-	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 )
 
 func startGenesisTestServer(filepath string) *httptest.Server {

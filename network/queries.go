@@ -7,7 +7,8 @@ import (
 	"sync"
 
 	"github.com/cosmos/cosmos-sdk/types/query"
-
+	"github.com/ignite/cli/ignite/pkg/cosmoserror"
+	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/pkg/errors"
 	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
@@ -15,8 +16,6 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cosmoserror"
-	"github.com/ignite/cli/ignite/pkg/events"
 )
 
 // ErrObjectNotFound is returned when the query returns a not found error.

@@ -1,12 +1,12 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-
-	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/numbers"
+	"github.com/spf13/cobra"
+
+	"github.com/ignite/cli-plugin-network/network"
 )
 
 // NewNetworkRequestReject creates a new request reject

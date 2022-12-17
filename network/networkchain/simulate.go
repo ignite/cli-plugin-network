@@ -8,15 +8,15 @@ import (
 	"time"
 
 	"github.com/cenkalti/backoff"
-	"github.com/pelletier/go-toml"
-	"github.com/pkg/errors"
-
-	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli/ignite/pkg/availableport"
 	"github.com/ignite/cli/ignite/pkg/cache"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/httpstatuschecker"
 	"github.com/ignite/cli/ignite/pkg/xurl"
+	"github.com/pelletier/go-toml"
+	"github.com/pkg/errors"
+
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 // listeningTimeout is the maximum time to wait for the chain start.

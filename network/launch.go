@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/ignite/cli/ignite/pkg/events"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/events"
 )
 
 // MinLaunchTimeOffset represents an offset used when minimum launch time is used

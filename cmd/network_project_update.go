@@ -5,11 +5,11 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/cliui"
+	"github.com/ignite/cli/ignite/pkg/yaml"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/yaml"
 )
 
 const (

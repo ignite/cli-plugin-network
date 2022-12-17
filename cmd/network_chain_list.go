@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"github.com/ignite/cli/ignite/pkg/cliui"
+	"github.com/ignite/cli/ignite/pkg/cliui/entrywriter"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/cliui/entrywriter"
 )
 
 var LaunchSummaryHeader = []string{

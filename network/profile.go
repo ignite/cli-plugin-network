@@ -6,12 +6,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
+	"github.com/ignite/cli/ignite/pkg/cosmoserror"
+	"github.com/ignite/cli/ignite/pkg/events"
 	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cosmoserror"
-	"github.com/ignite/cli/ignite/pkg/events"
 )
 
 // CoordinatorIDByAddress returns the CoordinatorByAddress from SPN.

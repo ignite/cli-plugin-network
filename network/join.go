@@ -4,12 +4,12 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/cosmosutil"
+	"github.com/ignite/cli/ignite/pkg/xurl"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cosmosutil"
-	"github.com/ignite/cli/ignite/pkg/xurl"
 )
 
 type joinOptions struct {

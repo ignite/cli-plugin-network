@@ -6,11 +6,11 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/cliui/icons"
+	"github.com/ignite/cli/ignite/pkg/events"
 	rewardtypes "github.com/tendermint/spn/x/reward/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cliui/icons"
-	"github.com/ignite/cli/ignite/pkg/events"
 )
 
 // SetReward set a chain reward.

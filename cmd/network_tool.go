@@ -7,9 +7,10 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli/ignite/pkg/ctxticker"
 	"github.com/ignite/cli/ignite/pkg/xchisel"
+
+	"github.com/ignite/cli-plugin-network/network/networkchain"
 )
 
 func NewNetworkTool() *cobra.Command {

@@ -9,11 +9,11 @@ import (
 	ibcclienttypes "github.com/cosmos/ibc-go/v5/modules/core/02-client/types"
 	ibcconntypes "github.com/cosmos/ibc-go/v5/modules/core/03-connection/types"
 	ibcchanneltypes "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
+	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	spntypes "github.com/tendermint/spn/pkg/types"
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 )
 
 // Node is node builder.

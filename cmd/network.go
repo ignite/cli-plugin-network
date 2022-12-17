@@ -3,13 +3,6 @@ package cmd
 import (
 	"path/filepath"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
-	flag "github.com/spf13/pflag"
-
-	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli-plugin-network/network/networkchain"
-	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli/ignite/config"
 	"github.com/ignite/cli/ignite/pkg/cache"
 	"github.com/ignite/cli/ignite/pkg/cliui"
@@ -17,6 +10,13 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/gitpod"
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
+	flag "github.com/spf13/pflag"
+
+	"github.com/ignite/cli-plugin-network/network"
+	"github.com/ignite/cli-plugin-network/network/networkchain"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 var (

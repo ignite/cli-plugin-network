@@ -3,13 +3,13 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/ignite/cli/ignite/pkg/cliui"
+	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 	"github.com/spf13/cobra"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 )
 
 var requestSummaryHeader = []string{"ID", "Status", "Type", "Content"}

@@ -4,14 +4,13 @@ import (
 	"context"
 	"fmt"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ignite/cli/ignite/pkg/events"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/events"
 )
 
 // Reviewal keeps a request's reviewal.

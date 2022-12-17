@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
+	"github.com/ignite/cli/ignite/pkg/xtime"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ignite/cli-plugin-network/network/testutil"
-	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
-	"github.com/ignite/cli/ignite/pkg/xtime"
 )
 
 var sampleTime = time.Unix(1000, 1000)

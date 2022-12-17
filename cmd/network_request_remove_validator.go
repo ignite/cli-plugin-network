@@ -1,12 +1,12 @@
 package cmd
 
 import (
+	"github.com/ignite/cli/ignite/pkg/cliui"
+	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
-	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 )
 
 // NewNetworkRequestRemoveValidator creates a new command to send remove validator request.

@@ -4,11 +4,6 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/manifoldco/promptui"
-	"github.com/spf13/cobra"
-
-	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli-plugin-network/network/networkchain"
 	"github.com/ignite/cli/ignite/pkg/chaincmd"
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/cliquiz"
@@ -16,6 +11,11 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	cosmosgenesis "github.com/ignite/cli/ignite/pkg/cosmosutil/genesis"
 	"github.com/ignite/cli/ignite/services/chain"
+	"github.com/manifoldco/promptui"
+	"github.com/spf13/cobra"
+
+	"github.com/ignite/cli-plugin-network/network"
+	"github.com/ignite/cli-plugin-network/network/networkchain"
 )
 
 const (

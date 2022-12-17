@@ -4,11 +4,6 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
-	"github.com/ignite/cli-plugin-network/network"
-	"github.com/ignite/cli-plugin-network/network/networkchain"
-	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli/ignite/pkg/cache"
 	"github.com/ignite/cli/ignite/pkg/chaincmd"
 	"github.com/ignite/cli/ignite/pkg/cliui"
@@ -16,6 +11,11 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/gitpod"
 	"github.com/ignite/cli/ignite/pkg/goenv"
+	"github.com/spf13/cobra"
+
+	"github.com/ignite/cli-plugin-network/network"
+	"github.com/ignite/cli-plugin-network/network/networkchain"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 const (
