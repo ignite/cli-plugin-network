@@ -22,9 +22,6 @@ import (
 var (
 	nightly bool
 	local   bool
-
-	spnNodeAddress   string
-	spnFaucetAddress string
 )
 
 const (
@@ -117,10 +114,10 @@ validators launch their nodes, a blockchain will be live.
 	}
 
 	// configure flags.
-	c.PersistentFlags().BoolVar(&local, flagLocal, false, "use Ignite chain running locally")
-	c.PersistentFlags().BoolVar(&nightly, flagNightly, false, "use Ignite chain - nightly version")
-	c.PersistentFlags().StringVar(&spnNodeAddress, flagSPNNodeAddress, spnNodeAddressNightly, "set Ignite chain RPC address")
-	c.PersistentFlags().StringVar(&spnFaucetAddress, flagSPNFaucetAddress, spnFaucetAddressNightly, "set Ignite chain faucet address")
+	c.PersistentFlags().BoolVar(&local, flagLocal, false, "Use local SPN network")
+	c.PersistentFlags().BoolVar(&nightly, flagNightly, false, "Use nightly SPN network")
+	// Includes Flags for Node and Faucet Address
+	c.PersistentFlags().AddFlagSet(flagSetSpnAddresses())
 
 	// add sub commands.
 	c.AddCommand(
@@ -148,6 +145,11 @@ type (
 		ev  events.Bus
 		cmd *cobra.Command
 		cc  cosmosclient.Client
+	}
+
+	NetworkAddresses struct {
+		NodeAddress   string
+		FaucetAddress string
 	}
 )
 
@@ -210,23 +212,16 @@ func (n NetworkBuilder) Network(options ...network.Option) (network.Network, err
 }
 
 func getNetworkCosmosClient(cmd *cobra.Command) (cosmosclient.Client, error) {
-	// check preconfigured networks
-	if nightly && local {
-		return cosmosclient.Client{}, errors.New("local and nightly networks can't both be specified in the same command, specify local or nightly")
-	}
-	if local {
-		spnNodeAddress = spnNodeAddressLocal
-		spnFaucetAddress = spnFaucetAddressLocal
-	} else if nightly {
-		spnNodeAddress = spnNodeAddressNightly
-		spnFaucetAddress = spnFaucetAddressNightly
+	spn, err := getSpnAddresses(cmd)
+	if err != nil {
+		return cosmosclient.Client{}, err
 	}
 
 	cosmosOptions := []cosmosclient.Option{
 		cosmosclient.WithHome(cosmosaccount.KeyringHome),
-		cosmosclient.WithNodeAddress(spnNodeAddress),
+		cosmosclient.WithNodeAddress(spn.NodeAddress),
 		cosmosclient.WithAddressPrefix(networktypes.SPN),
-		cosmosclient.WithUseFaucet(spnFaucetAddress, networktypes.SPNDenom, 5),
+		cosmosclient.WithUseFaucet(spn.FaucetAddress, networktypes.SPNDenom, 5),
 		cosmosclient.WithKeyringServiceName(cosmosaccount.KeyringServiceName),
 		cosmosclient.WithKeyringDir(getKeyringDir(cmd)),
 		cosmosclient.WithGas(cosmosclient.GasAuto),
@@ -365,4 +360,35 @@ func flagGetCheckDependencies(cmd *cobra.Command) (check bool) {
 
 func printSection(session *cliui.Session, title string) error {
 	return session.Printf("------\n%s\n------\n\n", title)
+}
+
+func flagSetSpnAddresses() *flag.FlagSet {
+	fs := flag.NewFlagSet("", flag.ContinueOnError)
+	fs.String(flagSPNNodeAddress, spnNodeAddressNightly, "SPN node address")
+	fs.String(flagSPNFaucetAddress, spnFaucetAddressNightly, "SPN faucet address")
+	return fs
+}
+
+func getSpnAddresses(cmd *cobra.Command) (NetworkAddresses, error) {
+	// check preconfigured networks
+	if nightly && local {
+		return NetworkAddresses{}, errors.New("local and nightly networks can't both be specified in the same command, specify local or nightly")
+	}
+	if nightly {
+		return NetworkAddresses{spnNodeAddressNightly, spnFaucetAddressNightly}, nil
+	}
+	if local {
+		return NetworkAddresses{spnNodeAddressLocal, spnFaucetAddressLocal}, nil
+	}
+
+	spnNodeAddress, err := cmd.Flags().GetString(flagSPNNodeAddress)
+	if err != nil {
+		return NetworkAddresses{}, err
+	}
+
+	spnFaucetAddress, err := cmd.Flags().GetString(flagSPNFaucetAddress)
+	if err != nil {
+		return NetworkAddresses{}, err
+	}
+	return NetworkAddresses{spnNodeAddress, spnFaucetAddress}, nil
 }
