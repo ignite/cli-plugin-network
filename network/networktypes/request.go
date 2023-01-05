@@ -10,6 +10,25 @@ import (
 	"github.com/ignite/cli/ignite/pkg/xtime"
 )
 
+// Request action descriptions
+const (
+	RequestActionAddAccount        = "add account to the network"
+	RequestActionAddValidator      = "join the network as a validator"
+	RequestActionAddVestingAccount = "add vesting account to the network"
+	RequestActionRemoveAccount     = "remove account from the network"
+	RequestActionRemoveValidator   = "remove validator from the network"
+	RequestActionChangeParams      = "change param on the network"
+
+	RequestActionResultAddAccount        = "account added to the network"
+	RequestActionResultAddValidator      = "Validator added to the network"
+	RequestActionResultAddVestingAccount = "vesting account added to the network"
+	RequestActionResultRemoveAccount     = "account removed from network"
+	RequestActionResultRemoveValidator   = "validator removed from network"
+	RequestActionResultChangeParams      = "param changed on network"
+
+	RequestActionUnrecognized = "<unrecognized request>"
+)
+
 type (
 	// Request represents the launch Request of a chain on SPN.
 	Request struct {
@@ -46,6 +65,46 @@ func RequestsFromRequestContents(launchID uint64, contents []launchtypes.Request
 		}
 	}
 	return requests
+}
+
+// RequestActionDescriptionFromContent describes the action of the request from its content
+func RequestActionDescriptionFromContent(content launchtypes.RequestContent) string {
+	switch content.Content.(type) {
+	case *launchtypes.RequestContent_GenesisAccount:
+		return RequestActionAddAccount
+	case *launchtypes.RequestContent_GenesisValidator:
+		return RequestActionAddValidator
+	case *launchtypes.RequestContent_VestingAccount:
+		return RequestActionAddVestingAccount
+	case *launchtypes.RequestContent_AccountRemoval:
+		return RequestActionRemoveAccount
+	case *launchtypes.RequestContent_ValidatorRemoval:
+		return RequestActionRemoveValidator
+	case *launchtypes.RequestContent_ParamChange:
+		return RequestActionChangeParams
+	default:
+		return RequestActionUnrecognized
+	}
+}
+
+// RequestActionResultDescriptionFromContent describe the result of the action of the request from its content
+func RequestActionResultDescriptionFromContent(content launchtypes.RequestContent) string {
+	switch content.Content.(type) {
+	case *launchtypes.RequestContent_GenesisAccount:
+		return RequestActionResultAddAccount
+	case *launchtypes.RequestContent_GenesisValidator:
+		return RequestActionResultAddValidator
+	case *launchtypes.RequestContent_VestingAccount:
+		return RequestActionResultAddVestingAccount
+	case *launchtypes.RequestContent_AccountRemoval:
+		return RequestActionResultRemoveAccount
+	case *launchtypes.RequestContent_ValidatorRemoval:
+		return RequestActionResultRemoveValidator
+	case *launchtypes.RequestContent_ParamChange:
+		return RequestActionResultChangeParams
+	default:
+		return RequestActionUnrecognized
+	}
 }
 
 // VerifyRequest verifies the validity of the request from its content (static check).
