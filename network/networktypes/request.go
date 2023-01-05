@@ -34,6 +34,20 @@ func ToRequest(request launchtypes.Request) Request {
 	}
 }
 
+// RequestsFromRequestContents creates a list of requests from a list request contents to simulate requests that have not been sent to request pool yet
+// The request ID is set to 0 for the first request and incremented for each request, other values are not set
+func RequestsFromRequestContents(launchID uint64, contents []launchtypes.RequestContent) []Request {
+	requests := make([]Request, len(contents))
+	for i, content := range contents {
+		requests[i] = Request{
+			LaunchID:  launchID,
+			RequestID: uint64(i),
+			Content:   content,
+		}
+	}
+	return requests
+}
+
 // VerifyRequest verifies the validity of the request from its content (static check).
 func VerifyRequest(request Request) error {
 	req, ok := request.Content.Content.(*launchtypes.RequestContent_GenesisValidator)
