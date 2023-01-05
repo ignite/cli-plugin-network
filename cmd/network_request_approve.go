@@ -102,7 +102,7 @@ func networkRequestApproveHandler(cmd *cobra.Command, args []string) error {
 	for _, id := range ids {
 		reviewals = append(reviewals, network.ApproveRequest(id))
 	}
-	if err := n.SubmitRequest(cmd.Context(), launchID, reviewals...); err != nil {
+	if err := n.SubmitRequestReviewals(cmd.Context(), launchID, reviewals...); err != nil {
 		return err
 	}
 

@@ -75,8 +75,8 @@ func (n Network) RequestFromIDs(ctx context.Context, launchID uint64, requestIDs
 	return reqs, nil
 }
 
-// SubmitRequest submits reviewals for proposals in batch for chain.
-func (n Network) SubmitRequest(ctx context.Context, launchID uint64, reviewal ...Reviewal) error {
+// SubmitRequestReviewals submits reviewals for proposals in batch for chain.
+func (n Network) SubmitRequestReviewals(ctx context.Context, launchID uint64, reviewal ...Reviewal) error {
 	n.ev.Send("Submitting requests...", events.ProgressStart())
 
 	addr, err := n.account.Address(networktypes.SPN)
@@ -333,6 +333,48 @@ func (n Network) SendParamChangeRequest(
 		n.ev.Send(
 			fmt.Sprintf(
 				"Request %d to change param on the network has been submitted!", requestRes.RequestID,
+			),
+			events.ProgressFinish(),
+		)
+	}
+	return nil
+}
+
+// SendRequest creates the Request message to SPN.
+func (n Network) SendRequest(
+	ctx context.Context,
+	launchID uint64,
+	content launchtypes.Content,
+) error {
+	addr, err := n.account.Address(networktypes.SPN)
+	if err != nil {
+		return err
+	}
+
+	msg := launchtypes.NewMsgSendRequest(
+		addr,
+		launchID,
+		content,
+	)
+
+	n.ev.Send("Broadcasting transaction", events.ProgressStart())
+
+	res, err := n.cosmos.BroadcastTx(ctx, n.account, msg)
+	if err != nil {
+		return err
+	}
+
+	var requestRes launchtypes.MsgSendRequestResponse
+	if err := res.Decode(&requestRes); err != nil {
+		return err
+	}
+
+	if requestRes.AutoApproved {
+		n.ev.Send("Request executed by the coordinator!", events.ProgressFinish())
+	} else {
+		n.ev.Send(
+			fmt.Sprintf(
+				"Request %d has been submitted!", requestRes.RequestID,
 			),
 			events.ProgressFinish(),
 		)
