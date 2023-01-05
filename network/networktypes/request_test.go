@@ -14,6 +14,98 @@ import (
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
+func TestRequestsFromRequestContents(t *testing.T) {
+	tests := []struct {
+		name     string
+		launchID uint64
+		reqs     []launchtypes.RequestContent
+		want     []networktypes.Request
+	}{
+		{
+			name:     "empty request contents",
+			launchID: 0,
+			reqs:     []launchtypes.RequestContent{},
+			want:     []networktypes.Request{},
+		},
+		{
+			name:     "one request content",
+			launchID: 1,
+			reqs: []launchtypes.RequestContent{
+				launchtypes.NewGenesisAccount(
+					1,
+					"spn1dd246y",
+					sdk.NewCoins(sdk.
+						NewCoin("stake", sdkmath.NewInt(1000)),
+					),
+				),
+			},
+			want: []networktypes.Request{
+				{
+					LaunchID:  1,
+					RequestID: 0,
+					Content: launchtypes.NewGenesisAccount(
+						1,
+						"spn1dd246y",
+						sdk.NewCoins(sdk.
+							NewCoin("stake", sdkmath.NewInt(1000)),
+						),
+					),
+				},
+			},
+		},
+		{
+			name:     "multiple request contents",
+			launchID: 2,
+			reqs: []launchtypes.RequestContent{
+				launchtypes.NewGenesisAccount(
+					2,
+					"spn5s5z2x",
+					sdk.NewCoins(sdk.
+						NewCoin("foo", sdkmath.NewInt(2000)),
+					),
+				),
+				launchtypes.NewGenesisAccount(
+					2,
+					"spn2x2x2x",
+					sdk.NewCoins(sdk.
+						NewCoin("bar", sdkmath.NewInt(5000)),
+					),
+				),
+			},
+			want: []networktypes.Request{
+				{
+					LaunchID:  2,
+					RequestID: 0,
+					Content: launchtypes.NewGenesisAccount(
+						2,
+						"spn5s5z2x",
+						sdk.NewCoins(sdk.
+							NewCoin("foo", sdkmath.NewInt(2000)),
+						),
+					),
+				},
+				{
+					LaunchID:  2,
+					RequestID: 1,
+					Content: launchtypes.NewGenesisAccount(
+						2,
+						"spn2x2x2x",
+						sdk.NewCoins(sdk.
+							NewCoin("bar", sdkmath.NewInt(5000)),
+						),
+					),
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := networktypes.RequestsFromRequestContents(tt.launchID, tt.reqs)
+			require.Equal(t, tt.want, got)
+		})
+	}
+}
+
 func TestVerifyAddValidatorRequest(t *testing.T) {
 	gentx := []byte(`{
   "body": {
