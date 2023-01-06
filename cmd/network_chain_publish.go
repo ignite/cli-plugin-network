@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/tendermint/spn/pkg/chainid"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
@@ -323,7 +324,19 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 	}
 
 	if !amountCoins.IsZero() {
-		if err := n.SendAccountRequestForCoordinator(cmd.Context(), launchID, amountCoins); err != nil {
+		// create a request to add an account to the genesis
+		addr, err := n.AccountAddress()
+		if err != nil {
+			return err
+		}
+		addAccountRequest := launchtypes.NewGenesisAccount(
+			launchID,
+			addr,
+			amountCoins,
+		)
+
+		// send the request
+		if err := n.SendRequest(cmd.Context(), launchID, addAccountRequest); err != nil {
 			return err
 		}
 	}

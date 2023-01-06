@@ -10,9 +10,11 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/numbers"
 	"github.com/spf13/cobra"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 // NewNetworkRequestVerify verify the request and simulate the chain.
@@ -64,8 +66,7 @@ func networkRequestVerifyHandler(cmd *cobra.Command, args []string) error {
 	}
 
 	// verify the requests
-
-	if err := verifyRequest(cmd.Context(), cacheStorage, nb, launchID, ids...); err != nil {
+	if err := verifyRequests(cmd.Context(), cacheStorage, nb, launchID, ids...); err != nil {
 		session.Printf("%s Request(s) %s not valid\n", icons.NotOK, numbers.List(ids, "#"))
 		return err
 	}
@@ -73,47 +74,23 @@ func networkRequestVerifyHandler(cmd *cobra.Command, args []string) error {
 	return session.Printf("%s Request(s) %s verified\n", icons.OK, numbers.List(ids, "#"))
 }
 
-// verifyRequest initialize the chain from the launch ID in a temporary directory
-// and simulate the launch of the chain from genesis with the request IDs.
-func verifyRequest(
+// verifyRequests initializes the chain from the launch ID in a temporary directory
+// and simulate the launch of the chain from genesis with the request IDs
+func verifyRequests(
 	ctx context.Context,
 	cacheStorage cache.Storage,
 	nb NetworkBuilder,
 	launchID uint64,
 	requestIDs ...uint64,
 ) error {
-	n, err := nb.Network()
+	// initialize the chain for simulation
+	c, n, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, cacheStorage, nb, launchID)
 	if err != nil {
 		return err
 	}
+	defer cleanup()
 
-	// initialize the chain with a temporary dir
-	chainLaunch, err := n.ChainLaunch(ctx, launchID)
-	if err != nil {
-		return err
-	}
-
-	homeDir, err := os.MkdirTemp("", "")
-	if err != nil {
-		return err
-	}
-	defer os.RemoveAll(homeDir)
-
-	c, err := nb.Chain(
-		networkchain.SourceLaunch(chainLaunch),
-		networkchain.WithHome(homeDir),
-		networkchain.WithKeyringBackend(chaincmd.KeyringBackendTest),
-	)
-	if err != nil {
-		return err
-	}
-
-	// fetch the current genesis information and the requests for the chain for simulation
-	genesisInformation, err := n.GenesisInformation(ctx, launchID)
-	if err != nil {
-		return err
-	}
-
+	// fetch the requests from the network
 	requests, err := n.RequestFromIDs(ctx, launchID, requestIDs...)
 	if err != nil {
 		return err
@@ -125,4 +102,76 @@ func verifyRequest(
 		genesisInformation,
 		requests,
 	)
+}
+
+// verifyRequestsFromRequestContents initializes the chain from the launch ID in a temporary directory
+// and simulate the launch of the chain from genesis with the request contents
+func verifyRequestsFromRequestContents(
+	ctx context.Context,
+	cacheStorage cache.Storage,
+	nb NetworkBuilder,
+	launchID uint64,
+	requestContents ...launchtypes.RequestContent,
+) error {
+	// initialize the chain for simulation
+	c, _, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, cacheStorage, nb, launchID)
+	if err != nil {
+		return err
+	}
+	defer cleanup()
+
+	return c.SimulateRequests(
+		ctx,
+		cacheStorage,
+		genesisInformation,
+		networktypes.RequestsFromRequestContents(launchID, requestContents),
+	)
+}
+
+// initializeSimulationEnvironment initializes the chain from the launch ID in a temporary directory for simulating requests
+func initializeSimulationEnvironment(
+	ctx context.Context,
+	cacheStorage cache.Storage,
+	nb NetworkBuilder,
+	launchID uint64,
+) (
+	c *networkchain.Chain,
+	n network.Network,
+	gi networktypes.GenesisInformation,
+	cleanup func(),
+	err error,
+) {
+	n, err = nb.Network()
+	if err != nil {
+		return c, n, gi, cleanup, err
+	}
+
+	// fetch the current genesis information and the requests for the chain for simulation
+	gi, err = n.GenesisInformation(ctx, launchID)
+	if err != nil {
+		return c, n, gi, cleanup, err
+	}
+
+	// initialize the chain with a temporary dir
+	chainLaunch, err := n.ChainLaunch(ctx, launchID)
+	if err != nil {
+		return c, n, gi, cleanup, err
+	}
+
+	homeDir, err := os.MkdirTemp("", "")
+	if err != nil {
+		return c, n, gi, cleanup, err
+	}
+
+	c, err = nb.Chain(
+		networkchain.SourceLaunch(chainLaunch),
+		networkchain.WithHome(homeDir),
+		networkchain.WithKeyringBackend(chaincmd.KeyringBackendTest),
+	)
+	if err != nil {
+		os.RemoveAll(homeDir)
+		return c, n, gi, cleanup, err
+	}
+
+	return c, n, gi, func() { os.RemoveAll(homeDir) }, nil
 }

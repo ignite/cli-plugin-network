@@ -178,8 +178,25 @@ func networkChainJoinHandler(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	// create the message to add the validator.
-	return n.Join(cmd.Context(), c, launchID, gentxPath, joinOptions...)
+	// create requests to join as a validator
+	joinRequests, err := n.GetJoinRequestContents(cmd.Context(), c, launchID, gentxPath, joinOptions...)
+	if err != nil {
+		return err
+	}
+
+	// simulate the join requests
+	if err := verifyRequestsFromRequestContents(
+		cmd.Context(),
+		cacheStorage,
+		nb,
+		launchID,
+		joinRequests...,
+	); err != nil {
+		return err
+	}
+
+	// send join requests
+	return n.SendRequests(cmd.Context(), launchID, joinRequests)
 }
 
 // askPublicAddress prepare questions to interactively ask for a publicAddress

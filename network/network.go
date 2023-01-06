@@ -16,6 +16,7 @@ import (
 	rewardtypes "github.com/tendermint/spn/x/reward/types"
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 	"github.com/ignite/cli/ignite/pkg/events"
@@ -149,4 +150,9 @@ func ParseID(id string) (uint64, error) {
 		return 0, errors.New("ID must be greater than 0")
 	}
 	return objID, nil
+}
+
+// AccountAddress returns the address of the account used by the network builder
+func (n Network) AccountAddress() (string, error) {
+	return n.account.Address(networktypes.SPN)
 }

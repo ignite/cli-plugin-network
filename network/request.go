@@ -147,3 +147,17 @@ func (n Network) SendRequest(
 	}
 	return nil
 }
+
+// SendRequests creates and sends the Request message to SPN
+func (n Network) SendRequests(
+	ctx context.Context,
+	launchID uint64,
+	contents []launchtypes.RequestContent,
+) error {
+	for _, content := range contents {
+		if err := n.SendRequest(ctx, launchID, content); err != nil {
+			return err
+		}
+	}
+	return nil
+}
