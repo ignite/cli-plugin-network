@@ -24,7 +24,7 @@ const (
 )
 
 func TestJoin(t *testing.T) {
-	t.Run("successfully get join request", func(t *testing.T) {
+	t.Run("successfully get join request with custom public address", func(t *testing.T) {
 		account := testutil.NewTestAccount(t, testutil.TestAccountName)
 		tmp := t.TempDir()
 		addr, err := account.Address(networktypes.SPN)
@@ -67,7 +67,7 @@ func TestJoin(t *testing.T) {
 		require.ElementsMatch(t, expectedReqs, reqs)
 	})
 
-	t.Run("successfully get join request with custom gentx", func(t *testing.T) {
+	t.Run("successfully get join request with public address read from the gentx", func(t *testing.T) {
 		account := testutil.NewTestAccount(t, testutil.TestAccountName)
 		tmp := t.TempDir()
 		addr, err := account.Address(networktypes.SPN)
