@@ -335,6 +335,17 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 			amountCoins,
 		)
 
+		// simulate the add account request
+		if err := verifyRequestsFromRequestContents(
+			cmd.Context(),
+			cacheStorage,
+			nb,
+			launchID,
+			addAccountRequest,
+		); err != nil {
+			return err
+		}
+
 		// send the request
 		if err := n.SendRequest(cmd.Context(), launchID, addAccountRequest); err != nil {
 			return err
