@@ -58,12 +58,12 @@ func networkRequestRemoveAccountHandler(cmd *cobra.Command, args []string) error
 		return err
 	}
 
-	// create the add account request
+	// create the remove account request
 	removeAccountRequest := launchtypes.NewAccountRemoval(
 		address,
 	)
 
-	// simulate the add account request
+	// simulate the remove account request
 	if err := verifyRequestsFromRequestContents(
 		cmd.Context(),
 		cacheStorage,

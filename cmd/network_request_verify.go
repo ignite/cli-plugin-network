@@ -84,7 +84,7 @@ func verifyRequests(
 	requestIDs ...uint64,
 ) error {
 	// initialize the chain for simulation
-	c, n, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, cacheStorage, nb, launchID)
+	c, n, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, nb, launchID)
 	if err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func verifyRequestsFromRequestContents(
 	requestContents ...launchtypes.RequestContent,
 ) error {
 	// initialize the chain for simulation
-	c, _, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, cacheStorage, nb, launchID)
+	c, _, genesisInformation, cleanup, err := initializeSimulationEnvironment(ctx, nb, launchID)
 	if err != nil {
 		return err
 	}
@@ -131,7 +131,6 @@ func verifyRequestsFromRequestContents(
 // initializeSimulationEnvironment initializes the chain from the launch ID in a temporary directory for simulating requests
 func initializeSimulationEnvironment(
 	ctx context.Context,
-	cacheStorage cache.Storage,
 	nb NetworkBuilder,
 	launchID uint64,
 ) (
