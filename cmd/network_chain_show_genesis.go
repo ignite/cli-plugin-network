@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network/networkchain"
+	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
 
 func newNetworkChainShowGenesis() *cobra.Command {
@@ -93,6 +94,16 @@ func networkChainShowGenesisHandler(cmd *cobra.Command, args []string) error {
 
 	if err := xos.Rename(genesisPath, out); err != nil {
 		return err
+	}
+
+	if chainLaunch.Metadata.Cli.Version != "" && chainLaunch.Metadata.Cli.Version != networktypes.Version {
+		session.Printf(`⚠️chain %d has been published with a different version of the plugin (%s, current version is %s)
+this may result in a genesis that is different from other validators' genesis
+for chain launch, please update the plugin to the same version`,
+			launchID,
+			chainLaunch.Metadata.Cli.Version,
+			networktypes.Version,
+		)
 	}
 
 	return session.Printf("%s Genesis generated: %s\n", icons.Bullet, out)

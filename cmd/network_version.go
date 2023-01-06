@@ -4,7 +4,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli/ignite/pkg/cliui"
-	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -27,5 +26,5 @@ func networkVersion(_ *cobra.Command, _ []string) error {
 	session := cliui.New(cliui.StartSpinner())
 	defer session.End()
 
-	return session.Printf("%s%s\n", icons.OK, networktypes.Version)
+	return session.Printf("%s\n", networktypes.Version)
 }
