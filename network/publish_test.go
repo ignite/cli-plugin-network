@@ -20,6 +20,8 @@ import (
 	"github.com/ignite/cli-plugin-network/network/testutil"
 )
 
+var metadata = []byte("{\"cli\":{\"version\":\"1\"}}")
+
 func startGenesisTestServer(filepath string) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		file, err := os.ReadFile(filepath)
@@ -76,6 +78,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -135,6 +138,7 @@ func TestPublish(t *testing.T) {
 					HasCampaign:    false,
 					CampaignID:     0,
 					AccountBalance: accountBalance,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -204,6 +208,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    true,
 					CampaignID:     testutil.ProjectID,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -292,6 +297,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    true,
 					CampaignID:     testutil.ProjectID,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -359,6 +365,7 @@ func TestPublish(t *testing.T) {
 					),
 					HasCampaign: false,
 					CampaignID:  0,
+					Metadata:    []byte("{\"cli\":{\"version\":\"1\"}}"),
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -417,6 +424,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -473,6 +481,7 @@ func TestPublish(t *testing.T) {
 					),
 					HasCampaign: false,
 					CampaignID:  0,
+					Metadata:    []byte("{\"cli\":{\"version\":\"1\"}}"),
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -532,6 +541,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -735,6 +745,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -882,6 +893,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -936,6 +948,7 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 					HasCampaign:    false,
 					CampaignID:     0,
+					Metadata:       metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
