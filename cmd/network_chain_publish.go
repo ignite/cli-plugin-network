@@ -86,7 +86,7 @@ the "--account-balance" flag with a list of coins.
 	c.Flags().String(flagChainID, "", "chain ID to use for this network")
 	c.Flags().Uint64(flagProject, 0, "project ID to use for this network")
 	c.Flags().Bool(flagNoCheck, false, "skip verifying chain's integrity")
-	c.Flags().String(flagProjectMetadata, "", "add a project metadata")
+	c.Flags().String(flagMetadata, "", "add chain metadata")
 	c.Flags().String(flagProjectTotalSupply, "", "add a total of the mainnet of a project")
 	c.Flags().String(flagShares, "", "add shares for the project")
 	c.Flags().Bool(flagMainnet, false, "initialize a mainnet project")
@@ -117,7 +117,7 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 		chainID, _               = cmd.Flags().GetString(flagChainID)
 		project, _               = cmd.Flags().GetUint64(flagProject)
 		noCheck, _               = cmd.Flags().GetBool(flagNoCheck)
-		projectMetadata, _       = cmd.Flags().GetString(flagProjectMetadata)
+		metadata, _              = cmd.Flags().GetString(flagMetadata)
 		projectTotalSupplyStr, _ = cmd.Flags().GetString(flagProjectTotalSupply)
 		sharesStr, _             = cmd.Flags().GetString(flagShares)
 		isMainnet, _             = cmd.Flags().GetBool(flagMainnet)
@@ -237,7 +237,7 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 	initOptions = append(initOptions, networkchain.WithHome(homeDir))
 
 	// prepare publish options
-	publishOptions := []network.PublishOption{network.WithMetadata(projectMetadata)}
+	publishOptions := []network.PublishOption{network.WithMetadata(metadata)}
 
 	switch {
 	case genesisURL != "":
