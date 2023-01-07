@@ -12,10 +12,19 @@ import (
 // to revert a launched chain.
 func NewNetworkChainRevertLaunch() *cobra.Command {
 	c := &cobra.Command{
-		Use:   "revert-launch [launch-id]",
-		Short: "Revert launch of a network",
-		Args:  cobra.ExactArgs(1),
-		RunE:  networkChainRevertLaunchHandler,
+		Use: "revert-launch [launch-id]",
+		Short: `The revert launch command cancels the previously scheduled launch of a chain.
+
+Only the coordinator of the chain can execute the launch command.
+
+	ignite network chain revert-launch 42
+
+After the revert launch command is executed, changes to the genesis of the chain
+are allowed again. For example, validators will be able to request to join the
+chain. Revert launch also resets the launch time.
+`,
+		Args: cobra.ExactArgs(1),
+		RunE: networkChainRevertLaunchHandler,
 	}
 
 	c.Flags().AddFlagSet(flagNetworkFrom())
