@@ -52,9 +52,18 @@ in a home directory used by "ignite network chain init" by default. To use a
 different directory, use the "--home" flag or pass a gentx file directly with
 the  "--gentx" flag.
 
+To join a chain as a validator, you must provide the IP address of your node so
+that other validators can connect to it. The join command will ask you for the
+IP address and will attempt to automatically detect and fill in the value. If
+you want to manually specify the IP address, you can use the "--peer-address"
+flag:
+
+	ignite network chain join 42 --peer-address 0.0.0.0
+
 Since "join" broadcasts a transaction to the Ignite blockchain, you will need an
 account on the Ignite blockchain. During the testnet phase, however, Ignite
-automatically requests tokens from a faucet.`,
+automatically requests tokens from a faucet.
+`,
 		Args: cobra.ExactArgs(1),
 		RunE: networkChainJoinHandler,
 	}
