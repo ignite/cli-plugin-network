@@ -1,7 +1,7 @@
 package networktypes
 
 // Current version of the network plugin
-const Version = "0.1.0"
+const Version = "1"
 
 // Cli holds information about the CLI used to interact with the chain
 type Cli struct {
