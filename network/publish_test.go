@@ -20,7 +20,7 @@ import (
 	"github.com/ignite/cli-plugin-network/network/testutil"
 )
 
-var metadata = []byte("{\"cli\":{\"version\":\"1\"}}")
+var metadata = []byte(`{"cli":{"version":"1"}}`)
 
 func startGenesisTestServer(filepath string) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
