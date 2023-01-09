@@ -886,6 +886,7 @@ github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:
 github.com/ignite/cli v0.25.3-0.20230104180229-a712f7007658 h1:dc7tWGuW8b6iX+Ph+2pS9YUijqy4wvebldjKAOBLAyw=
 github.com/ignite/cli v0.25.3-0.20230104180229-a712f7007658/go.mod h1:8awEYK31HLR8ecLuVABvOX9VJChyz5D/yWWc2Pu5C2s=
 github.com/ignite/modules v0.0.0-20220912090139-7c325cae763a h1:0P8qg4YS0hb8jomZedhbooEKE3JZhRNAewV8+8otr6k=
+github.com/ignite/modules v0.0.0-20220912090139-7c325cae763a/go.mod h1:BmcHZ5Q+9jrnL2k7U7sVOPh0FD7cshCJDxysAb8SCS0=
 github.com/ignite/web v0.4.3 h1:LHucUEXttzCf5JmxO5/xLKVx1Qz1o124HqF4Nii5uWQ=
 github.com/ignite/web v0.4.3/go.mod h1:WZWBaBYF8RazN7dE462BLpvXDY8ScacxcJ07BKwX/jY=
 github.com/imdario/mergo v0.3.5/go.mod h1:2EnlNZ0deacrJVfApfmtdGgDfMuh/nq6Ok1EcJh5FfA=
@@ -1466,6 +1467,7 @@ github.com/tendermint/btcd v0.1.1/go.mod h1:DC6/m53jtQzr/NFmMNEu0rxf18/ktVoVtMrn
 github.com/tendermint/crypto v0.0.0-20191022145703-50d29ede1e15 h1:hqAk8riJvK4RMWx1aInLzndwxKalgi5rTqgfXxOxbEI=
 github.com/tendermint/crypto v0.0.0-20191022145703-50d29ede1e15/go.mod h1:z4YtwM70uOnk8h0pjJYlj3zdYwi9l03By6iAIF5j/Pk=
 github.com/tendermint/fundraising v0.3.1 h1:S4uOV/T7YNBqXhsCZnq/TUoHB0d2kM+6tKeTD4WhLN0=
+github.com/tendermint/fundraising v0.3.1/go.mod h1:7rCHXGOoFiUBD7sAZ4u+/EFq4MgQEn7tFopX6Qe6zpc=
 github.com/tendermint/go-amino v0.16.0 h1:GyhmgQKvqF82e2oZeuMSp9JTN0N09emoSZlb2lyGa2E=
 github.com/tendermint/go-amino v0.16.0/go.mod h1:TQU0M1i/ImAo+tYpZi73AU3V/dKeCoMC9Sphe2ZwGME=
 github.com/tendermint/spn v0.2.1-0.20221125172725-052fbf576cb2 h1:3sf/j+p+XFSenqu1DNcjvW01dSPpvx06Xef3EiSvqhg=
