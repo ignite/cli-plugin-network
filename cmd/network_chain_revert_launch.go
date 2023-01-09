@@ -13,7 +13,7 @@ import (
 func NewNetworkChainRevertLaunch() *cobra.Command {
 	c := &cobra.Command{
 		Use:   "revert-launch [launch-id]",
-		Short: "Revert launch a network as a coordinator",
+		Short: "Revert launch of a network as a coordinator",
 		Long: `The revert launch command reverts the previously scheduled launch of a chain.
 
 Only the coordinator of the chain can execute the launch command.
