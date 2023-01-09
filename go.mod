@@ -20,7 +20,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.1
-	github.com/tendermint/spn v0.2.1-0.20221125172725-052fbf576cb2
+	github.com/tendermint/spn v0.2.1-0.20221216182831-2e94cf41fcf1
 	github.com/tendermint/tendermint v0.34.24
 	github.com/vektra/mockery/v2 v2.16.0
 	golang.org/x/sync v0.1.0
@@ -95,7 +95,7 @@ require (
 	github.com/containerd/containerd v1.6.8 // indirect
 	github.com/cosiner/argv v0.1.0 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
-	github.com/cosmos/cosmos-proto v1.0.0-alpha8 // indirect
+	github.com/cosmos/cosmos-proto v1.0.0-beta.1 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gorocksdb v1.2.0 // indirect
 	github.com/cosmos/iavl v0.19.4 // indirect
@@ -203,7 +203,7 @@ require (
 	github.com/hdevalence/ed25519consensus v0.0.0-20220222234857-c00d1f31bab3 // indirect
 	github.com/hexops/gotextdiff v1.0.3 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
-	github.com/ignite/modules v0.0.0-20220912090139-7c325cae763a // indirect
+	github.com/ignite/modules v0.0.0-20221215224430-496fd9a7820c // indirect
 	github.com/ignite/web v0.4.3 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
