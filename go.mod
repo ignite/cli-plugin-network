@@ -20,6 +20,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.1
+	github.com/tbruyelle/mdgofmt v0.1.2
 	github.com/tendermint/spn v0.2.1-0.20221216182831-2e94cf41fcf1
 	github.com/tendermint/tendermint v0.34.24
 	github.com/vektra/mockery/v2 v2.16.0
