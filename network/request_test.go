@@ -11,7 +11,7 @@ import (
 	"github.com/ignite/cli-plugin-network/network/testutil"
 )
 
-func TestRequestParamChange(t *testing.T) {
+func TestSendRequest(t *testing.T) {
 	t.Run("successfully send request", func(t *testing.T) {
 		var (
 			account        = testutil.NewTestAccount(t, testutil.TestAccountName)
@@ -46,7 +46,12 @@ func TestRequestParamChange(t *testing.T) {
 			}), nil).
 			Once()
 
-		sendRequestError := network.SendParamChangeRequest(context.Background(), testutil.LaunchID, module, param, value)
+		sendRequestError := network.SendRequest(context.Background(), testutil.LaunchID, launchtypes.NewParamChange(
+			testutil.LaunchID,
+			module,
+			param,
+			value,
+		))
 		require.NoError(t, sendRequestError)
 		suite.AssertAllMocks(t)
 	})

@@ -91,7 +91,7 @@ func networkRequestApproveHandler(cmd *cobra.Command, args []string) error {
 
 	// if requests must be verified, we simulate the chain in a temporary directory with the requests
 	if !noVerification {
-		if err := verifyRequest(cmd.Context(), cacheStorage, nb, launchID, ids...); err != nil {
+		if err := verifyRequests(cmd.Context(), cacheStorage, nb, launchID, ids...); err != nil {
 			return errors.Wrap(err, "request(s) not valid")
 		}
 		session.Printf("%s Request(s) %s verified\n", icons.OK, numbers.List(ids, "#"))
@@ -102,7 +102,7 @@ func networkRequestApproveHandler(cmd *cobra.Command, args []string) error {
 	for _, id := range ids {
 		reviewals = append(reviewals, network.ApproveRequest(id))
 	}
-	if err := n.SubmitRequest(cmd.Context(), launchID, reviewals...); err != nil {
+	if err := n.SubmitRequestReviewals(cmd.Context(), launchID, reviewals...); err != nil {
 		return err
 	}
 

@@ -33,14 +33,14 @@ func WithPublicAddress(addr string) JoinOption {
 	}
 }
 
-// Join to the network.
-func (n Network) Join(
+// GetJoinRequestContents returns the request contents to join a chain as a validator
+func (n Network) GetJoinRequestContents(
 	ctx context.Context,
 	c Chain,
 	launchID uint64,
 	gentxPath string,
 	options ...JoinOption,
-) error {
+) (reqs []launchtypes.RequestContent, err error) {
 	o := joinOptions{}
 	for _, apply := range options {
 		apply(&o)
@@ -49,19 +49,18 @@ func (n Network) Join(
 	var (
 		nodeID string
 		peer   launchtypes.Peer
-		err    error
 	)
 
 	// parse the gentx content
 	gentxInfo, gentx, err := cosmosutil.GentxFromPath(gentxPath)
 	if err != nil {
-		return err
+		return reqs, err
 	}
 
 	// get the peer address
 	if o.publicAddress != "" {
 		if nodeID, err = c.NodeID(ctx); err != nil {
-			return err
+			return reqs, err
 		}
 
 		if xurl.IsHTTP(o.publicAddress) {
@@ -72,30 +71,32 @@ func (n Network) Join(
 	} else {
 		// if the peer address is not specified, we parse it from the gentx memo
 		if peer, err = ParsePeerAddress(gentxInfo.Memo); err != nil {
-			return err
+			return reqs, err
 		}
 	}
 
 	// change the chain address prefix to spn
 	accountAddress, err := cosmosutil.ChangeAddressPrefix(gentxInfo.DelegatorAddress, networktypes.SPN)
 	if err != nil {
-		return err
+		return reqs, err
 	}
 
 	if !o.accountAmount.IsZero() {
-		if err := n.SendAccountRequest(ctx, launchID, accountAddress, o.accountAmount); err != nil {
-			return err
-		}
+		reqs = append(reqs, launchtypes.NewGenesisAccount(
+			launchID,
+			accountAddress,
+			o.accountAmount,
+		))
 	}
 
-	return n.SendValidatorRequest(ctx, launchID, peer, accountAddress, gentx, gentxInfo)
-}
+	reqs = append(reqs, launchtypes.NewGenesisValidator(
+		launchID,
+		accountAddress,
+		gentx,
+		gentxInfo.PubKey,
+		gentxInfo.SelfDelegation,
+		peer,
+	))
 
-func (n Network) SendAccountRequestForCoordinator(ctx context.Context, launchID uint64, amount sdk.Coins) error {
-	addr, err := n.account.Address(networktypes.SPN)
-	if err != nil {
-		return err
-	}
-
-	return n.SendAccountRequest(ctx, launchID, addr, amount)
+	return reqs, nil
 }
