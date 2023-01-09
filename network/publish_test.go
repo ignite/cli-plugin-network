@@ -365,7 +365,7 @@ func TestPublish(t *testing.T) {
 					),
 					HasCampaign: false,
 					CampaignID:  0,
-					Metadata:    []byte("{\"cli\":{\"version\":\"1\"}}"),
+					Metadata:    metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -481,7 +481,7 @@ func TestPublish(t *testing.T) {
 					),
 					HasCampaign: false,
 					CampaignID:  0,
-					Metadata:    []byte("{\"cli\":{\"version\":\"1\"}}"),
+					Metadata:    metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
