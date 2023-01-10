@@ -2,6 +2,7 @@ package network
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"os"
 	"path/filepath"
@@ -172,7 +173,7 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 	} else if o.mainnet {
 		// a mainnet is always associated to a project
 		// if no project is provided, we create one, and we directly initialize the mainnet
-		projectID, err = n.CreateProject(ctx, c.Name(), o.metadata, o.totalSupply)
+		projectID, err = n.CreateProject(ctx, c.Name(), "", o.totalSupply)
 		if err != nil {
 			return 0, 0, err
 		}
@@ -239,6 +240,12 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 			)
 		}
 
+		// set plugin version in metadata
+		metadata, err := FillMetadata([]byte(o.metadata))
+		if err != nil {
+			return 0, 0, err
+		}
+
 		msgCreateChain := launchtypes.NewMsgCreateChain(
 			addr,
 			chainID,
@@ -248,7 +255,7 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 			projectID != 0,
 			projectID,
 			o.accountBalance,
-			nil,
+			metadata,
 		)
 		res, err := n.cosmos.BroadcastTx(ctx, n.account, msgCreateChain)
 		if err != nil {
@@ -265,4 +272,31 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 	}
 
 	return launchID, projectID, nil
+}
+
+// FillMetadata fills the metadata of the chain with the plugin version
+func FillMetadata(metadata []byte) ([]byte, error) {
+	cli := networktypes.Cli{
+		Version: networktypes.Version,
+	}
+
+	// if no metadata provided, create one with just the version
+	if len(metadata) == 0 {
+		newMetadata := networktypes.Metadata{
+			Cli: cli,
+		}
+
+		return json.Marshal(newMetadata)
+	}
+
+	// if metadata has been provided by the coordinator, set the version for the cli
+	var newMetadata map[string]interface{}
+	err := json.Unmarshal(metadata, &newMetadata)
+	if err != nil {
+		return metadata, errors.New("metadata of the chain must be in json format")
+	}
+
+	newMetadata["cli"] = cli
+
+	return json.Marshal(newMetadata)
 }
