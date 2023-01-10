@@ -27,7 +27,7 @@ type (
 		Network                NetworkType `json:"Network"`
 		Reward                 string      `json:"Reward,omitempty"`
 		AccountBalance         sdk.Coins   `json:"AccountBalance"`
-		Metadata               interface{} `json:"Metadata"`
+		Metadata               Metadata    `json:"Metadata"`
 	}
 )
 
@@ -69,7 +69,7 @@ func ToChainLaunch(chain launchtypes.Chain) ChainLaunch {
 	if err != nil {
 		// an error shouldn't happen
 		// in case it occurs, we consider metadata as invalid and dismiss those
-		launch.Metadata = nil
+		launch.Metadata = Metadata{}
 	}
 
 	// check if custom genesis URL is provided.

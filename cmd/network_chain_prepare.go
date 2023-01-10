@@ -95,6 +95,16 @@ func networkChainPrepareHandler(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	if !force && chainLaunch.Metadata.Cli.Version != "" && !chainLaunch.Metadata.IsCurrentVersion() {
+		return fmt.Errorf(`chain %d has been published with a different version of the plugin (%s, current version is %s)
+this may result in a genesis that is different from other validators' genesis
+use --force to prepare anyway`,
+			launchID,
+			chainLaunch.Metadata.Cli.Version,
+			networktypes.Version,
+		)
+	}
+
 	if !force && !chainLaunch.LaunchTriggered {
 		return fmt.Errorf("chain %d launch has not been triggered yet. use --force to prepare anyway", launchID)
 	}
