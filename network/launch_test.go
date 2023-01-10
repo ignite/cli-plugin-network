@@ -15,9 +15,10 @@ import (
 )
 
 const (
-	TestMinRemainingTime = time.Second * 3600
-	TestMaxRemainingTime = time.Second * 86400
-	TestRevertDelay      = time.Second * 3600
+	TestMinRemainingTime  = time.Second * 3600
+	TestMaxRemainingTime  = time.Second * 86400
+	TestRevertDelay       = time.Second * 3600
+	TestMaxMetadataLength = 2000
 )
 
 func TestTriggerLaunch(t *testing.T) {
@@ -39,6 +40,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, nil).
 			Once()
@@ -75,6 +77,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, nil).
 			Once()
@@ -106,6 +109,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, nil).
 			Once()
@@ -140,6 +144,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, nil).
 			Once()
@@ -180,6 +185,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, nil).
 			Once()
@@ -217,6 +223,7 @@ func TestTriggerLaunch(t *testing.T) {
 					TestRevertDelay,
 					sdk.Coins(nil),
 					sdk.Coins(nil),
+					TestMaxMetadataLength,
 				),
 			}, expectedError).
 			Once()

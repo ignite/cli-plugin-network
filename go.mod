@@ -7,12 +7,12 @@ require (
 	github.com/aws/smithy-go v1.13.4
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/cosmos/cosmos-sdk v0.46.7
-	github.com/cosmos/ibc-go/v5 v5.1.0
+	github.com/cosmos/ibc-go/v6 v6.1.0
 	github.com/go-git/go-git/v5 v5.5.0
 	github.com/goccy/go-yaml v1.9.7
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.25.3-0.20230104180229-a712f7007658
+	github.com/ignite/cli v0.25.3-0.20230109164130-c9c1c6053ff7
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
@@ -20,7 +20,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.1
-	github.com/tendermint/spn v0.2.1-0.20221125172725-052fbf576cb2
+	github.com/tendermint/spn v0.2.1-0.20221216182831-2e94cf41fcf1
 	github.com/tendermint/tendermint v0.34.24
 	github.com/vektra/mockery/v2 v2.16.0
 	golang.org/x/sync v0.1.0
@@ -55,7 +55,7 @@ require (
 	github.com/alexkohler/prealloc v1.0.0 // indirect
 	github.com/alingse/asasalint v0.0.11 // indirect
 	github.com/andrew-d/go-termutil v0.0.0-20150726205930-009166a695a2 // indirect
-	github.com/armon/go-metrics v0.4.0 // indirect
+	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5 // indirect
 	github.com/ashanbrown/forbidigo v1.3.0 // indirect
 	github.com/ashanbrown/makezero v1.1.1 // indirect
@@ -89,13 +89,14 @@ require (
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/cilium/ebpf v0.7.0 // indirect
 	github.com/cloudflare/circl v1.1.0 // indirect
+	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
 	github.com/confio/ics23/go v0.9.0 // indirect
 	github.com/containerd/cgroups v1.0.3 // indirect
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/containerd/containerd v1.6.8 // indirect
 	github.com/cosiner/argv v0.1.0 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
-	github.com/cosmos/cosmos-proto v1.0.0-alpha7 // indirect
+	github.com/cosmos/cosmos-proto v1.0.0-beta.1 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gorocksdb v1.2.0 // indirect
 	github.com/cosmos/iavl v0.19.4 // indirect
@@ -125,7 +126,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/firefart/nonamedreturns v1.0.4 // indirect
-	github.com/fsnotify/fsnotify v1.5.4 // indirect
+	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/fzipp/gocyclo v0.6.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-critic/go-critic v0.6.5 // indirect
@@ -203,7 +204,7 @@ require (
 	github.com/hdevalence/ed25519consensus v0.0.0-20220222234857-c00d1f31bab3 // indirect
 	github.com/hexops/gotextdiff v1.0.3 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
-	github.com/ignite/modules v0.0.0-20220912090139-7c325cae763a // indirect
+	github.com/ignite/modules v0.0.0-20221215224430-496fd9a7820c // indirect
 	github.com/ignite/web v0.4.3 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
@@ -315,10 +316,10 @@ require (
 	github.com/sourcegraph/annotate v0.0.0-20160123013949-f4cad6c6324d // indirect
 	github.com/sourcegraph/go-diff v0.6.1 // indirect
 	github.com/sourcegraph/syntaxhighlight v0.0.0-20170531221838-bd320f5d308e // indirect
-	github.com/spf13/afero v1.8.2 // indirect
+	github.com/spf13/afero v1.9.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/viper v1.13.0 // indirect
+	github.com/spf13/viper v1.14.0 // indirect
 	github.com/ssgreg/nlreturn/v2 v2.2.1 // indirect
 	github.com/stbenjam/no-sprintf-host-port v0.1.1 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect

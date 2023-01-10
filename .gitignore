@@ -1,1 +1,14 @@
 cli-plugin-network
+
+# IDE
+.idea
+.envrc
+.vscode
+
+# OS
+.DS_Store
+
+# Generate report files
+*.out
+*.test
+cover.html
