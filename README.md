@@ -1,6 +1,8 @@
 # cli-plugin-network
 
-`cli-plugin-network` is an Ignite CLI plugin that allows to launch new Cosmos blockchains by interacting with the Ignite chain to coordinate with validators.
+`cli-plugin-network` is plugin developed for [Ignite CLI](https://github.com/ignite/cli).
+
+The plugin add `ignite network` commands that allow to launch new Cosmos blockchains by interacting with the Ignite Chain to coordinate with validators.
 
 The plugin is integrated into Ignite CLI by default.
 
