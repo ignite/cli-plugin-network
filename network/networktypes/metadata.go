@@ -15,7 +15,7 @@ type Metadata struct {
 	Cli Cli `json:"cli"`
 }
 
-// IsVersionEqual checks if the version of the CLI is equal with one from the metadata
-func (m Metadata) IsVersionEqual(version string) bool {
-	return m.Cli.Version == version
+// IsCurrentVersion checks if the version of the CLI is equal to the current version
+func (m Metadata) IsCurrentVersion() bool {
+	return m.Cli.Version == Version
 }

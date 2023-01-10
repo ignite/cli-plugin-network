@@ -96,7 +96,7 @@ func networkChainShowGenesisHandler(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	if chainLaunch.Metadata.Cli.Version != "" && chainLaunch.Metadata.Cli.Version != networktypes.Version {
+	if chainLaunch.Metadata.Cli.Version != "" && !chainLaunch.Metadata.IsCurrentVersion() {
 		session.Printf(`⚠️ chain %d has been published with a different version of the plugin (%s, current version is %s)
 this may result in a genesis that is different from other validators' genesis
 for chain launch, please update the plugin to the same version\n`,
