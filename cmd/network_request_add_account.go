@@ -8,6 +8,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 	"github.com/spf13/cobra"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
@@ -46,6 +47,11 @@ in an error.
 func networkRequestAddAccountHandler(cmd *cobra.Command, args []string) error {
 	session := cliui.New(cliui.StartSpinner())
 	defer session.End()
+
+	cacheStorage, err := newCache(cmd)
+	if err != nil {
+		return err
+	}
 
 	nb, err := newNetworkBuilder(cmd, CollectEvents(session.EventBus()))
 	if err != nil {
@@ -99,10 +105,24 @@ func networkRequestAddAccountHandler(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	return n.SendAccountRequest(
-		cmd.Context(),
+	// create the add account request
+	addAccountRequest := launchtypes.NewGenesisAccount(
 		launchID,
 		address,
 		balance,
 	)
+
+	// simulate the add account request
+	if err := verifyRequestsFromRequestContents(
+		cmd.Context(),
+		cacheStorage,
+		nb,
+		launchID,
+		addAccountRequest,
+	); err != nil {
+		return err
+	}
+
+	// send the request
+	return n.SendRequest(cmd.Context(), launchID, addAccountRequest)
 }

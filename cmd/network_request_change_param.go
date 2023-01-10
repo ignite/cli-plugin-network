@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/spf13/cobra"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networkchain"
@@ -28,6 +29,11 @@ func NewNetworkRequestChangeParam() *cobra.Command {
 func networkRequestChangeParamHandler(cmd *cobra.Command, args []string) error {
 	session := cliui.New(cliui.StartSpinner())
 	defer session.End()
+
+	cacheStorage, err := newCache(cmd)
+	if err != nil {
+		return err
+	}
 
 	nb, err := newNetworkBuilder(cmd, CollectEvents(session.EventBus()))
 	if err != nil {
@@ -71,11 +77,25 @@ func networkRequestChangeParamHandler(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	return n.SendParamChangeRequest(
-		cmd.Context(),
+	// create the param change request
+	paramChangeRequest := launchtypes.NewParamChange(
 		launchID,
 		module,
 		param,
 		value,
 	)
+
+	// simulate the param change request
+	if err := verifyRequestsFromRequestContents(
+		cmd.Context(),
+		cacheStorage,
+		nb,
+		launchID,
+		paramChangeRequest,
+	); err != nil {
+		return err
+	}
+
+	// send the request
+	return n.SendRequest(cmd.Context(), launchID, paramChangeRequest)
 }

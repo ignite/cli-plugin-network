@@ -3,16 +3,219 @@ package networktypes_test
 import (
 	"encoding/base64"
 	"fmt"
+	"math/rand"
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
+	spnsample "github.com/tendermint/spn/testutil/sample"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
+
+var (
+	r                         = rand.New(rand.NewSource(1))
+	SampleRequestAddAccount   = launchtypes.NewGenesisAccount(0, "spn1dd246y", spnsample.Coins(r))
+	SampleRequestAddValidator = launchtypes.NewGenesisValidator(
+		0,
+		"spn1dd246y",
+		spnsample.Bytes(r, 300),
+		spnsample.Bytes(r, 30),
+		spnsample.Coin(r),
+		spnsample.GenesisValidatorPeer(r),
+	)
+	SampleRequestAddVestingAccount = launchtypes.NewVestingAccount(0, "spn1dd246y", spnsample.VestingOptions(r))
+	SampleRequestRemoveAccount     = launchtypes.NewAccountRemoval("spn1dd246y")
+	SampleRequestRemoveValidator   = launchtypes.NewValidatorRemoval("spn1dd246y")
+	SampleRequestChangeParam       = launchtypes.NewParamChange(0, "foo", "bar", spnsample.Bytes(r, 30))
+)
+
+func TestRequestsFromRequestContents(t *testing.T) {
+	tests := []struct {
+		name     string
+		launchID uint64
+		reqs     []launchtypes.RequestContent
+		want     []networktypes.Request
+	}{
+		{
+			name:     "empty request contents",
+			launchID: 0,
+			reqs:     []launchtypes.RequestContent{},
+			want:     []networktypes.Request{},
+		},
+		{
+			name:     "one request content",
+			launchID: 1,
+			reqs: []launchtypes.RequestContent{
+				launchtypes.NewGenesisAccount(
+					1,
+					"spn1dd246y",
+					sdk.NewCoins(sdk.
+						NewCoin("stake", sdkmath.NewInt(1000)),
+					),
+				),
+			},
+			want: []networktypes.Request{
+				{
+					LaunchID:  1,
+					RequestID: 0,
+					Content: launchtypes.NewGenesisAccount(
+						1,
+						"spn1dd246y",
+						sdk.NewCoins(sdk.
+							NewCoin("stake", sdkmath.NewInt(1000)),
+						),
+					),
+				},
+			},
+		},
+		{
+			name:     "multiple request contents",
+			launchID: 2,
+			reqs: []launchtypes.RequestContent{
+				launchtypes.NewGenesisAccount(
+					2,
+					"spn5s5z2x",
+					sdk.NewCoins(sdk.
+						NewCoin("foo", sdkmath.NewInt(2000)),
+					),
+				),
+				launchtypes.NewGenesisAccount(
+					2,
+					"spn2x2x2x",
+					sdk.NewCoins(sdk.
+						NewCoin("bar", sdkmath.NewInt(5000)),
+					),
+				),
+			},
+			want: []networktypes.Request{
+				{
+					LaunchID:  2,
+					RequestID: 0,
+					Content: launchtypes.NewGenesisAccount(
+						2,
+						"spn5s5z2x",
+						sdk.NewCoins(sdk.
+							NewCoin("foo", sdkmath.NewInt(2000)),
+						),
+					),
+				},
+				{
+					LaunchID:  2,
+					RequestID: 1,
+					Content: launchtypes.NewGenesisAccount(
+						2,
+						"spn2x2x2x",
+						sdk.NewCoins(sdk.
+							NewCoin("bar", sdkmath.NewInt(5000)),
+						),
+					),
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := networktypes.RequestsFromRequestContents(tt.launchID, tt.reqs)
+			require.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestRequestActionDescriptionFromContent(t *testing.T) {
+	tests := []struct {
+		name string
+		req  launchtypes.RequestContent
+		want string
+	}{
+		{
+			name: "add account request content should return correct description",
+			req:  SampleRequestAddAccount,
+			want: networktypes.RequestActionAddAccount,
+		},
+		{
+			name: "add validator request content should return correct description",
+			req:  SampleRequestAddValidator,
+			want: networktypes.RequestActionAddValidator,
+		},
+		{
+			name: "add vesting account request content should return correct description",
+			req:  SampleRequestAddVestingAccount,
+			want: networktypes.RequestActionAddVestingAccount,
+		},
+		{
+			name: "remove account request content should return correct description",
+			req:  SampleRequestRemoveAccount,
+			want: networktypes.RequestActionRemoveAccount,
+		},
+		{
+			name: "remove validator request content should return correct description",
+			req:  SampleRequestRemoveValidator,
+			want: networktypes.RequestActionRemoveValidator,
+		},
+		{
+			name: "change params request content should return correct description",
+			req:  SampleRequestChangeParam,
+			want: networktypes.RequestActionChangeParams,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := networktypes.RequestActionDescriptionFromContent(tt.req)
+			require.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestRequestActionResultDescriptionFromContent(t *testing.T) {
+	tests := []struct {
+		name string
+		req  launchtypes.RequestContent
+		want string
+	}{
+		{
+			name: "add account request content should return correct result description",
+			req:  SampleRequestAddAccount,
+			want: networktypes.RequestActionResultAddAccount,
+		},
+		{
+			name: "add validator request content should return correct result description",
+			req:  SampleRequestAddValidator,
+			want: networktypes.RequestActionResultAddValidator,
+		},
+		{
+			name: "add vesting account request content should return correct result description",
+			req:  SampleRequestAddVestingAccount,
+			want: networktypes.RequestActionResultAddVestingAccount,
+		},
+		{
+			name: "remove account request content should return correct result description",
+			req:  SampleRequestRemoveAccount,
+			want: networktypes.RequestActionResultRemoveAccount,
+		},
+		{
+			name: "remove validator request content should return correct result description",
+			req:  SampleRequestRemoveValidator,
+			want: networktypes.RequestActionResultRemoveValidator,
+		},
+		{
+			name: "change params request content should return correct result description",
+			req:  SampleRequestChangeParam,
+			want: networktypes.RequestActionResultChangeParams,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := networktypes.RequestActionResultDescriptionFromContent(tt.req)
+			require.Equal(t, tt.want, got)
+		})
+	}
+}
 
 func TestVerifyAddValidatorRequest(t *testing.T) {
 	gentx := []byte(`{

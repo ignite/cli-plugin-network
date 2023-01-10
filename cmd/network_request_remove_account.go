@@ -4,6 +4,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 	"github.com/spf13/cobra"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network"
 	"github.com/ignite/cli-plugin-network/network/networktypes"
@@ -30,6 +31,11 @@ func networkRequestRemoveAccountHandler(cmd *cobra.Command, args []string) error
 	session := cliui.New(cliui.StartSpinner())
 	defer session.End()
 
+	cacheStorage, err := newCache(cmd)
+	if err != nil {
+		return err
+	}
+
 	nb, err := newNetworkBuilder(cmd, CollectEvents(session.EventBus()))
 	if err != nil {
 		return err
@@ -52,9 +58,22 @@ func networkRequestRemoveAccountHandler(cmd *cobra.Command, args []string) error
 		return err
 	}
 
-	return n.SendAccountRemoveRequest(
-		cmd.Context(),
-		launchID,
+	// create the remove account request
+	removeAccountRequest := launchtypes.NewAccountRemoval(
 		address,
 	)
+
+	// simulate the remove account request
+	if err := verifyRequestsFromRequestContents(
+		cmd.Context(),
+		cacheStorage,
+		nb,
+		launchID,
+		removeAccountRequest,
+	); err != nil {
+		return err
+	}
+
+	// send the request
+	return n.SendRequest(cmd.Context(), launchID, removeAccountRequest)
 }

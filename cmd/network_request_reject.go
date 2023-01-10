@@ -63,7 +63,7 @@ func networkRequestRejectHandler(cmd *cobra.Command, args []string) error {
 	for _, id := range ids {
 		reviewals = append(reviewals, network.RejectRequest(id))
 	}
-	if err := n.SubmitRequest(cmd.Context(), launchID, reviewals...); err != nil {
+	if err := n.SubmitRequestReviewals(cmd.Context(), launchID, reviewals...); err != nil {
 		return err
 	}
 
