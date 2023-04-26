@@ -23,8 +23,8 @@ func TestToChainLaunch(t *testing.T) {
 				GenesisChainID: "foo-1",
 				SourceURL:      "foo.com",
 				SourceHash:     "0xaaa",
-				HasCampaign:    true,
-				CampaignID:     1,
+				HasProject:     true,
+				ProjectID:      1,
 				InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
 			},
 			expected: networktypes.ChainLaunch{

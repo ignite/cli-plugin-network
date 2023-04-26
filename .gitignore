@@ -1,1 +1,6 @@
 cli-plugin-network
+release/
+build/
+.idea/
+.vscode/
+.DS_Store

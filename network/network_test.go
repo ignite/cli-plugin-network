@@ -19,7 +19,7 @@ func newSuite(account cosmosaccount.Account) (testutil.Suite, Network) {
 	return suite, New(
 		suite.CosmosClientMock,
 		account,
-		WithCampaignQueryClient(suite.CampaignQueryMock),
+		WithProjectQueryClient(suite.ProjectQueryMock),
 		WithLaunchQueryClient(suite.LaunchQueryMock),
 		WithProfileQueryClient(suite.ProfileQueryMock),
 		WithRewardQueryClient(suite.RewardClient),

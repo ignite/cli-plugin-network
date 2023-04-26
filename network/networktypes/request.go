@@ -3,11 +3,10 @@ package networktypes
 import (
 	"fmt"
 
-	launchtypes "github.com/tendermint/spn/x/launch/types"
-	"github.com/tendermint/tendermint/crypto/ed25519"
-
+	"github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/ignite/cli/ignite/pkg/cosmosutil"
 	"github.com/ignite/cli/ignite/pkg/xtime"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
 )
 
 // Request action descriptions

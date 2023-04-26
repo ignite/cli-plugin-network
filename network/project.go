@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/ignite/cli/ignite/pkg/events"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -49,15 +49,15 @@ func WithProjectTotalSupply(totalSupply sdk.Coins) Prop {
 // Project fetches the project from Network.
 func (n Network) Project(ctx context.Context, projectID uint64) (networktypes.Project, error) {
 	n.ev.Send("Fetching project information", events.ProgressStart())
-	res, err := n.campaignQuery.Campaign(ctx, &campaigntypes.QueryGetCampaignRequest{
-		CampaignID: projectID,
+	res, err := n.projectQuery.Project(ctx, &projecttypes.QueryGetProjectRequest{
+		ProjectID: projectID,
 	})
 	if errors.Is(cosmoserror.Unwrap(err), cosmoserror.ErrNotFound) {
 		return networktypes.Project{}, ErrObjectNotFound
 	} else if err != nil {
 		return networktypes.Project{}, err
 	}
-	return networktypes.ToProject(res.Campaign), nil
+	return networktypes.ToProject(res.Project), nil
 }
 
 // Projects fetches the projects from Network.
@@ -65,13 +65,13 @@ func (n Network) Projects(ctx context.Context) ([]networktypes.Project, error) {
 	var projects []networktypes.Project
 
 	n.ev.Send("Fetching projects information", events.ProgressStart())
-	res, err := n.campaignQuery.CampaignAll(ctx, &campaigntypes.QueryAllCampaignRequest{})
+	res, err := n.projectQuery.ProjectAll(ctx, &projecttypes.QueryAllProjectRequest{})
 	if err != nil {
 		return projects, err
 	}
 
 	// Parse fetched projects
-	for _, project := range res.Campaign {
+	for _, project := range res.Project {
 		projects = append(projects, networktypes.ToProject(project))
 	}
 
@@ -86,23 +86,23 @@ func (n Network) CreateProject(ctx context.Context, name, metadata string, total
 		return 0, err
 	}
 
-	msgCreateCampaign := campaigntypes.NewMsgCreateCampaign(
+	msgCreateProject := projecttypes.NewMsgCreateProject(
 		addr,
 		name,
 		totalSupply,
 		[]byte(metadata),
 	)
-	res, err := n.cosmos.BroadcastTx(ctx, n.account, msgCreateCampaign)
+	res, err := n.cosmos.BroadcastTx(ctx, n.account, msgCreateProject)
 	if err != nil {
 		return 0, err
 	}
 
-	var createCampaignRes campaigntypes.MsgCreateCampaignResponse
-	if err := res.Decode(&createCampaignRes); err != nil {
+	var createProjectRes projecttypes.MsgCreateProjectResponse
+	if err := res.Decode(&createProjectRes); err != nil {
 		return 0, err
 	}
 
-	return createCampaignRes.CampaignID, nil
+	return createProjectRes.ProjectID, nil
 }
 
 // InitializeMainnet Initialize the mainnet of the project.
@@ -119,7 +119,7 @@ func (n Network) InitializeMainnet(
 		return 0, err
 	}
 
-	msg := campaigntypes.NewMsgInitializeMainnet(
+	msg := projecttypes.NewMsgInitializeMainnet(
 		addr,
 		projectID,
 		sourceURL,
@@ -132,7 +132,7 @@ func (n Network) InitializeMainnet(
 		return 0, err
 	}
 
-	var initMainnetRes campaigntypes.MsgInitializeMainnetResponse
+	var initMainnetRes projecttypes.MsgInitializeMainnetResponse
 	if err := res.Decode(&initMainnetRes); err != nil {
 		return 0, err
 	}
@@ -162,7 +162,7 @@ func (n Network) UpdateProject(
 
 	msgs := make([]sdk.Msg, 0)
 	if p.name != "" || len(p.metadata) > 0 {
-		msgs = append(msgs, campaigntypes.NewMsgEditCampaign(
+		msgs = append(msgs, projecttypes.NewMsgEditProject(
 			account,
 			id,
 			p.name,
@@ -170,7 +170,7 @@ func (n Network) UpdateProject(
 		))
 	}
 	if !p.totalSupply.Empty() {
-		msgs = append(msgs, campaigntypes.NewMsgUpdateTotalSupply(
+		msgs = append(msgs, projecttypes.NewMsgUpdateTotalSupply(
 			account,
 			id,
 			p.totalSupply,

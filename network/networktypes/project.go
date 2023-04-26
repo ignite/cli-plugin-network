@@ -2,7 +2,7 @@ package networktypes
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 )
 
 // Project represents the project of a chain on SPN.
@@ -18,27 +18,27 @@ type Project struct {
 }
 
 // ToProject converts a project data from SPN and returns a Project object.
-func ToProject(campaign campaigntypes.Campaign) Project {
+func ToProject(project projecttypes.Project) Project {
 	return Project{
-		ID:                 campaign.CampaignID,
-		Name:               campaign.CampaignName,
-		CoordinatorID:      campaign.CoordinatorID,
-		MainnetID:          campaign.MainnetID,
-		MainnetInitialized: campaign.MainnetInitialized,
-		TotalSupply:        campaign.TotalSupply,
-		AllocatedShares:    campaign.AllocatedShares.String(),
-		Metadata:           string(campaign.Metadata),
+		ID:                 project.ProjectID,
+		Name:               project.ProjectName,
+		CoordinatorID:      project.CoordinatorID,
+		MainnetID:          project.MainnetID,
+		MainnetInitialized: project.MainnetInitialized,
+		TotalSupply:        project.TotalSupply,
+		AllocatedShares:    project.AllocatedShares.String(),
+		Metadata:           string(project.Metadata),
 	}
 }
 
 // MainnetAccount represents the project mainnet account of a chain on SPN.
 type MainnetAccount struct {
-	Address string               `json:"Address"`
-	Shares  campaigntypes.Shares `json:"Shares"`
+	Address string              `json:"Address"`
+	Shares  projecttypes.Shares `json:"Shares"`
 }
 
 // ToMainnetAccount converts a mainnet account data from SPN and returns a MainnetAccount object.
-func ToMainnetAccount(acc campaigntypes.MainnetAccount) MainnetAccount {
+func ToMainnetAccount(acc projecttypes.MainnetAccount) MainnetAccount {
 	return MainnetAccount{
 		Address: acc.Address,
 		Shares:  acc.Shares,
@@ -52,9 +52,9 @@ type ProjectChains struct {
 }
 
 // ToProjectChains converts a project chains data from SPN and returns a ProjectChains object.
-func ToProjectChains(c campaigntypes.CampaignChains) ProjectChains {
+func ToProjectChains(c projecttypes.ProjectChains) ProjectChains {
 	return ProjectChains{
-		ProjectID: c.CampaignID,
+		ProjectID: c.ProjectID,
 		Chains:    c.Chains,
 	}
 }

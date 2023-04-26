@@ -10,8 +10,8 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/pkg/errors"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 	rewardtypes "github.com/tendermint/spn/x/reward/types"
 	"golang.org/x/sync/errgroup"
 
@@ -201,11 +201,11 @@ func (n Network) MainnetAccount(
 		fmt.Sprintf("Fetching project %d mainnet account %s", projectID, address),
 		events.ProgressStart(),
 	)
-	res, err := n.campaignQuery.
+	res, err := n.projectQuery.
 		MainnetAccount(ctx,
-			&campaigntypes.QueryGetMainnetAccountRequest{
-				CampaignID: projectID,
-				Address:    address,
+			&projecttypes.QueryGetMainnetAccountRequest{
+				ProjectID: projectID,
+				Address:   address,
 			},
 		)
 	if errors.Is(cosmoserror.Unwrap(err), cosmoserror.ErrNotFound) {
@@ -220,10 +220,10 @@ func (n Network) MainnetAccount(
 // MainnetAccounts returns the list of project mainnet accounts for a launch from SPN.
 func (n Network) MainnetAccounts(ctx context.Context, projectID uint64) (genAccs []networktypes.MainnetAccount, err error) {
 	n.ev.Send("Fetching project mainnet accounts", events.ProgressStart())
-	res, err := n.campaignQuery.
+	res, err := n.projectQuery.
 		MainnetAccountAll(ctx,
-			&campaigntypes.QueryAllMainnetAccountRequest{
-				CampaignID: projectID,
+			&projecttypes.QueryAllMainnetAccountRequest{
+				ProjectID: projectID,
 			},
 		)
 	if err != nil {

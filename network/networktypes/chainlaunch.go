@@ -59,7 +59,7 @@ func ToChainLaunch(chain launchtypes.Chain) ChainLaunch {
 		SourceURL:              chain.SourceURL,
 		SourceHash:             chain.SourceHash,
 		LaunchTime:             launchTime,
-		ProjectID:              chain.CampaignID,
+		ProjectID:              chain.ProjectID,
 		LaunchTriggered:        chain.LaunchTriggered,
 		Network:                network,
 		AccountBalance:         chain.AccountBalance,
