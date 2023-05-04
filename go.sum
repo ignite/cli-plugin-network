@@ -922,8 +922,8 @@ github.com/iancoleman/strcase v0.2.0 h1:05I4QRnGpI0m37iZQRuskXh+w77mr6Z41lwQzuHL
 github.com/iancoleman/strcase v0.2.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
-github.com/ignite/cli v0.26.2-0.20230424141751-abae9a093016 h1:ke+D+MtQd6St/cE7CAbuVKYxY7avWvnYkwDzp9i9F3Y=
-github.com/ignite/cli v0.26.2-0.20230424141751-abae9a093016/go.mod h1:EwfPEVyMQUA5UJxSzCK7Dj3JPWEAltbQMwF5RWr4s8A=
+github.com/ignite/cli v0.26.2-0.20230504112712-4324e2ff958f h1:bADjJbtnUkYklnTG+wHiUDoH1ErYpuU8fUvN+A+uOQs=
+github.com/ignite/cli v0.26.2-0.20230504112712-4324e2ff958f/go.mod h1:EwfPEVyMQUA5UJxSzCK7Dj3JPWEAltbQMwF5RWr4s8A=
 github.com/ignite/modules v0.0.0-20230426163137-432873c36327 h1:V4mFjxxcavoAjZPE0+uq71jGcKPwhY+TyEblnKH17F4=
 github.com/ignite/modules v0.0.0-20230426163137-432873c36327/go.mod h1:lxwQ7CC1cmbSvOr6wb2twnrfHGdXp6our1FAYJdz3Cw=
 github.com/ignite/web v0.4.3 h1:LHucUEXttzCf5JmxO5/xLKVx1Qz1o124HqF4Nii5uWQ=

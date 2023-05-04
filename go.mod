@@ -13,7 +13,7 @@ require (
 	github.com/goccy/go-yaml v1.9.7
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.26.2-0.20230424141751-abae9a093016
+	github.com/ignite/cli v0.26.2-0.20230504112712-4324e2ff958f
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
