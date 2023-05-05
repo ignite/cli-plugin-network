@@ -1,6 +1,6 @@
 package networktypes
 
-// Current version of the network plugin
+// Version current version of the network plugin
 const Version = "1"
 
 // Cli holds information about the CLI used to interact with the chain

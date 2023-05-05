@@ -12,9 +12,9 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 	"github.com/ignite/cli-plugin-network/network/testutil"
@@ -76,8 +76,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).
@@ -135,8 +135,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					AccountBalance: accountBalance,
 					Metadata:       metadata,
 				},
@@ -185,12 +185,12 @@ func TestPublish(t *testing.T) {
 				},
 			}, nil).
 			Once()
-		suite.CampaignQueryMock.
+		suite.ProjectQueryMock.
 			On(
-				"Campaign",
+				"Project",
 				context.Background(),
-				&campaigntypes.QueryGetCampaignRequest{
-					CampaignID: testutil.ProjectID,
+				&projecttypes.QueryGetProjectRequest{
+					ProjectID: testutil.ProjectID,
 				},
 			).
 			Return(nil, nil).
@@ -206,8 +206,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    true,
-					CampaignID:     testutil.ProjectID,
+					HasProject:     true,
+					ProjectID:      testutil.ProjectID,
 					Metadata:       metadata,
 				},
 			).
@@ -251,23 +251,23 @@ func TestPublish(t *testing.T) {
 				},
 			}, nil).
 			Once()
-		suite.CampaignQueryMock.
+		suite.ProjectQueryMock.
 			On(
-				"Campaign",
+				"Project",
 				context.Background(),
-				&campaigntypes.QueryGetCampaignRequest{
-					CampaignID: testutil.ProjectID,
+				&projecttypes.QueryGetProjectRequest{
+					ProjectID: testutil.ProjectID,
 				},
 			).
 			Return(nil, nil).
 			Once()
-		suite.CampaignQueryMock.
+		suite.ProjectQueryMock.
 			On(
 				"TotalShares",
 				context.Background(),
-				&campaigntypes.QueryTotalSharesRequest{},
+				&projecttypes.QueryTotalSharesRequest{},
 			).
-			Return(&campaigntypes.QueryTotalSharesResponse{
+			Return(&projecttypes.QueryTotalSharesResponse{
 				TotalShares: 100000,
 			}, nil).
 			Once()
@@ -276,13 +276,13 @@ func TestPublish(t *testing.T) {
 				"BroadcastTx",
 				context.Background(),
 				account,
-				campaigntypes.NewMsgMintVouchers(
+				projecttypes.NewMsgMintVouchers(
 					addr,
 					testutil.ProjectID,
-					campaigntypes.NewSharesFromCoins(sdk.NewCoins(sdk.NewInt64Coin("foo", 2000), sdk.NewInt64Coin("staking", 50000))),
+					projecttypes.NewSharesFromCoins(sdk.NewCoins(sdk.NewInt64Coin("foo", 2000), sdk.NewInt64Coin("staking", 50000))),
 				),
 			).
-			Return(testutil.NewResponse(&campaigntypes.MsgMintVouchersResponse{}), nil).
+			Return(testutil.NewResponse(&projecttypes.MsgMintVouchersResponse{}), nil).
 			Once()
 		suite.CosmosClientMock.
 			On(
@@ -295,8 +295,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    true,
-					CampaignID:     testutil.ProjectID,
+					HasProject:     true,
+					ProjectID:      testutil.ProjectID,
 					Metadata:       metadata,
 				},
 			).
@@ -363,9 +363,9 @@ func TestPublish(t *testing.T) {
 						gts.URL,
 						customGenesisHash,
 					),
-					HasCampaign: false,
-					CampaignID:  0,
-					Metadata:    metadata,
+					HasProject: false,
+					ProjectID:  0,
+					Metadata:   metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -422,8 +422,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).
@@ -479,9 +479,9 @@ func TestPublish(t *testing.T) {
 					InitialGenesis: launchtypes.NewGenesisConfig(
 						testutil.ChainConfigYML,
 					),
-					HasCampaign: false,
-					CampaignID:  0,
-					Metadata:    metadata,
+					HasProject: false,
+					ProjectID:  0,
+					Metadata:   metadata,
 				},
 			).
 			Return(testutil.NewResponse(&launchtypes.MsgCreateChainResponse{
@@ -539,8 +539,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).
@@ -590,14 +590,14 @@ func TestPublish(t *testing.T) {
 				"BroadcastTx",
 				context.Background(),
 				account,
-				&campaigntypes.MsgCreateCampaign{
-					Coordinator:  addr,
-					CampaignName: testutil.ChainName,
-					Metadata:     []byte{},
+				&projecttypes.MsgCreateProject{
+					Coordinator: addr,
+					ProjectName: testutil.ChainName,
+					Metadata:    []byte{},
 				},
 			).
-			Return(testutil.NewResponse(&campaigntypes.MsgCreateCampaignResponse{
-				CampaignID: testutil.ProjectID,
+			Return(testutil.NewResponse(&projecttypes.MsgCreateProjectResponse{
+				ProjectID: testutil.ProjectID,
 			}), nil).
 			Once()
 		suite.CosmosClientMock.
@@ -605,15 +605,15 @@ func TestPublish(t *testing.T) {
 				"BroadcastTx",
 				context.Background(),
 				account,
-				&campaigntypes.MsgInitializeMainnet{
+				&projecttypes.MsgInitializeMainnet{
 					Coordinator:    addr,
-					CampaignID:     testutil.ProjectID,
+					ProjectID:      testutil.ProjectID,
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					MainnetChainID: testutil.ChainID,
 				},
 			).
-			Return(testutil.NewResponse(&campaigntypes.MsgInitializeMainnetResponse{
+			Return(testutil.NewResponse(&projecttypes.MsgInitializeMainnetResponse{
 				MainnetID: testutil.MainnetID,
 			}), nil).
 			Once()
@@ -660,14 +660,14 @@ func TestPublish(t *testing.T) {
 				"BroadcastTx",
 				context.Background(),
 				account,
-				&campaigntypes.MsgCreateCampaign{
-					Coordinator:  addr,
-					CampaignName: testutil.ChainName,
-					Metadata:     []byte{},
+				&projecttypes.MsgCreateProject{
+					Coordinator: addr,
+					ProjectName: testutil.ChainName,
+					Metadata:    []byte{},
 				},
 			).
-			Return(testutil.NewResponse(&campaigntypes.MsgCreateCampaignResponse{
-				CampaignID: testutil.ProjectID,
+			Return(testutil.NewResponse(&projecttypes.MsgCreateProjectResponse{
+				ProjectID: testutil.ProjectID,
 			}), nil).
 			Once()
 		suite.CosmosClientMock.
@@ -675,15 +675,15 @@ func TestPublish(t *testing.T) {
 				"BroadcastTx",
 				context.Background(),
 				account,
-				&campaigntypes.MsgInitializeMainnet{
+				&projecttypes.MsgInitializeMainnet{
 					Coordinator:    addr,
-					CampaignID:     testutil.ProjectID,
+					ProjectID:      testutil.ProjectID,
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					MainnetChainID: testutil.ChainID,
 				},
 			).
-			Return(testutil.NewResponse(&campaigntypes.MsgInitializeMainnetResponse{
+			Return(testutil.NewResponse(&projecttypes.MsgInitializeMainnetResponse{
 				MainnetID: testutil.MainnetID,
 			}), expectedError).
 			Once()
@@ -743,8 +743,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).
@@ -841,9 +841,9 @@ func TestPublish(t *testing.T) {
 				},
 			}, nil).
 			Once()
-		suite.CampaignQueryMock.
-			On("Campaign", mock.Anything, &campaigntypes.QueryGetCampaignRequest{
-				CampaignID: testutil.ProjectID,
+		suite.ProjectQueryMock.
+			On("Project", mock.Anything, &projecttypes.QueryGetProjectRequest{
+				ProjectID: testutil.ProjectID,
 			}).
 			Return(nil, cosmoserror.ErrNotFound).
 			Once()
@@ -891,8 +891,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).
@@ -946,8 +946,8 @@ func TestPublish(t *testing.T) {
 					SourceURL:      testutil.ChainSourceURL,
 					SourceHash:     testutil.ChainSourceHash,
 					InitialGenesis: launchtypes.NewDefaultInitialGenesis(),
-					HasCampaign:    false,
-					CampaignID:     0,
+					HasProject:     false,
+					ProjectID:      0,
 					Metadata:       metadata,
 				},
 			).

@@ -4,22 +4,21 @@ import (
 	"context"
 	"strconv"
 
+	ctypes "github.com/cometbft/cometbft/rpc/core/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/pkg/errors"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
-	launchtypes "github.com/tendermint/spn/x/launch/types"
-	monitoringctypes "github.com/tendermint/spn/x/monitoringc/types"
-	profiletypes "github.com/tendermint/spn/x/profile/types"
-	rewardtypes "github.com/tendermint/spn/x/reward/types"
-	ctypes "github.com/tendermint/tendermint/rpc/core/types"
-
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/xtime"
+	"github.com/pkg/errors"
+	launchtypes "github.com/tendermint/spn/x/launch/types"
+	monitoringctypes "github.com/tendermint/spn/x/monitoringc/types"
+	profiletypes "github.com/tendermint/spn/x/profile/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
+	rewardtypes "github.com/tendermint/spn/x/reward/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -38,7 +37,7 @@ type Network struct {
 	ev                      events.Bus
 	cosmos                  CosmosClient
 	account                 cosmosaccount.Account
-	campaignQuery           campaigntypes.QueryClient
+	projectQuery            projecttypes.QueryClient
 	launchQuery             launchtypes.QueryClient
 	profileQuery            profiletypes.QueryClient
 	rewardQuery             rewardtypes.QueryClient
@@ -66,9 +65,9 @@ type Chain interface {
 
 type Option func(*Network)
 
-func WithCampaignQueryClient(client campaigntypes.QueryClient) Option {
+func WithProjectQueryClient(client projecttypes.QueryClient) Option {
 	return func(n *Network) {
-		n.campaignQuery = client
+		n.projectQuery = client
 	}
 }
 
@@ -127,7 +126,7 @@ func New(cosmos CosmosClient, account cosmosaccount.Account, options ...Option) 
 		cosmos:                  cosmos,
 		account:                 account,
 		node:                    NewNode(cosmos),
-		campaignQuery:           campaigntypes.NewQueryClient(cosmos.Context()),
+		projectQuery:            projecttypes.NewQueryClient(cosmos.Context()),
 		launchQuery:             launchtypes.NewQueryClient(cosmos.Context()),
 		profileQuery:            profiletypes.NewQueryClient(cosmos.Context()),
 		rewardQuery:             rewardtypes.NewQueryClient(cosmos.Context()),

@@ -1,9 +1,8 @@
 package networktypes
 
 import (
-	"github.com/pkg/errors"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/pkg/errors"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 )
 

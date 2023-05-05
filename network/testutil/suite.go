@@ -13,7 +13,7 @@ type Suite struct {
 	ChainMock                *mocks.Chain
 	CosmosClientMock         *mocks.CosmosClient
 	LaunchQueryMock          *mocks.LaunchClient
-	CampaignQueryMock        *mocks.CampaignClient
+	ProjectQueryMock         *mocks.ProjectClient
 	ProfileQueryMock         *mocks.ProfileClient
 	RewardClient             *mocks.RewardClient
 	StakingClient            *mocks.StakingClient
@@ -28,7 +28,7 @@ func (s *Suite) AssertAllMocks(t *testing.T) {
 	s.ProfileQueryMock.AssertExpectations(t)
 	s.LaunchQueryMock.AssertExpectations(t)
 	s.CosmosClientMock.AssertExpectations(t)
-	s.CampaignQueryMock.AssertExpectations(t)
+	s.ProjectQueryMock.AssertExpectations(t)
 	s.RewardClient.AssertExpectations(t)
 	s.StakingClient.AssertExpectations(t)
 	s.MonitoringConsumerClient.AssertExpectations(t)
@@ -43,7 +43,7 @@ func NewSuite() Suite {
 		ChainMock:                new(mocks.Chain),
 		CosmosClientMock:         cosmos,
 		LaunchQueryMock:          new(mocks.LaunchClient),
-		CampaignQueryMock:        new(mocks.CampaignClient),
+		ProjectQueryMock:         new(mocks.ProjectClient),
 		ProfileQueryMock:         new(mocks.ProfileClient),
 		RewardClient:             new(mocks.RewardClient),
 		StakingClient:            new(mocks.StakingClient),

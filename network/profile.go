@@ -8,8 +8,8 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/ignite/cli/ignite/pkg/events"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -172,14 +172,14 @@ func (n Network) Profile(ctx context.Context, projectID uint64) (networktypes.Pr
 	vouchers := sdk.NewCoins()
 	for _, coin := range coins {
 		// parse the coin to filter all non-voucher coins from the balance
-		_, err := campaigntypes.VoucherCampaign(coin.Denom)
+		_, err := projecttypes.VoucherProject(coin.Denom)
 		if err == nil {
 			vouchers = append(vouchers, coin)
 		}
 	}
 	vouchers = vouchers.Sort()
 
-	var shares campaigntypes.Shares
+	var shares projecttypes.Shares
 
 	// if a project ID is specified, fetches the shares of the project
 	if projectID > 0 {

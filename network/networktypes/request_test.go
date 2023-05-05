@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
+	"github.com/cometbft/cometbft/crypto/ed25519"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 	spnsample "github.com/tendermint/spn/testutil/sample"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
-	"github.com/tendermint/tendermint/crypto/ed25519"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )

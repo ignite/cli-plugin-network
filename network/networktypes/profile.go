@@ -2,8 +2,8 @@ package networktypes
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 )
 
 // Validator represents the Validator profile on SPN.
@@ -20,7 +20,7 @@ type Validator struct {
 func (v Validator) ToProfile(
 	projectID uint64,
 	vouchers sdk.Coins,
-	shares campaigntypes.Shares,
+	shares projecttypes.Shares,
 ) Profile {
 	return Profile{
 		ProjectID:       projectID,
@@ -61,7 +61,7 @@ type Coordinator struct {
 func (c Coordinator) ToProfile(
 	projectID uint64,
 	vouchers sdk.Coins,
-	shares campaigntypes.Shares,
+	shares projecttypes.Shares,
 ) Profile {
 	return Profile{
 		ProjectID: projectID,
@@ -95,15 +95,15 @@ type (
 
 	// Profile represents the address profile on SPN.
 	Profile struct {
-		Address         string               `json:"Address"`
-		ProjectID       uint64               `json:"ProjectID,omitempty"`
-		Identity        string               `json:"Identity,omitempty"`
-		Website         string               `json:"Website,omitempty"`
-		Details         string               `json:"Details,omitempty"`
-		Moniker         string               `json:"Moniker,omitempty"`
-		SecurityContact string               `json:"SecurityContact,omitempty"`
-		Vouchers        sdk.Coins            `json:"Vouchers,omitempty"`
-		Shares          campaigntypes.Shares `json:"Shares,omitempty"`
+		Address         string              `json:"Address"`
+		ProjectID       uint64              `json:"ProjectID,omitempty"`
+		Identity        string              `json:"Identity,omitempty"`
+		Website         string              `json:"Website,omitempty"`
+		Details         string              `json:"Details,omitempty"`
+		Moniker         string              `json:"Moniker,omitempty"`
+		SecurityContact string              `json:"SecurityContact,omitempty"`
+		Vouchers        sdk.Coins           `json:"Vouchers,omitempty"`
+		Shares          projecttypes.Shares `json:"Shares,omitempty"`
 	}
 
 	// ProfileAcc represents the address profile method interface.
@@ -111,7 +111,7 @@ type (
 		ToProfile(
 			projectID uint64,
 			vouchers sdk.Coins,
-			shares campaigntypes.Shares,
+			shares projecttypes.Shares,
 		) Profile
 	}
 )

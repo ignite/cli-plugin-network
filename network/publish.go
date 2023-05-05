@@ -10,9 +10,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	cosmosgenesis "github.com/ignite/cli/ignite/pkg/cosmosutil/genesis"
 	"github.com/ignite/cli/ignite/pkg/events"
-	campaigntypes "github.com/tendermint/spn/x/campaign/types"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
+	projecttypes "github.com/tendermint/spn/x/project/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -163,9 +163,9 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 
 	// check if a project associated to the chain is provided
 	if projectID != 0 {
-		_, err = n.campaignQuery.
-			Campaign(ctx, &campaigntypes.QueryGetCampaignRequest{
-				CampaignID: o.projectID,
+		_, err = n.projectQuery.
+			Project(ctx, &projecttypes.QueryGetProjectRequest{
+				ProjectID: o.projectID,
 			})
 		if err != nil {
 			return 0, 0, err
@@ -181,7 +181,7 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 
 	// mint vouchers
 	if projectID != 0 && !o.sharePercentages.Empty() {
-		totalSharesResp, err := n.campaignQuery.TotalShares(ctx, &campaigntypes.QueryTotalSharesRequest{})
+		totalSharesResp, err := n.projectQuery.TotalShares(ctx, &projecttypes.QueryTotalSharesRequest{})
 		if err != nil {
 			return 0, 0, err
 		}
@@ -194,7 +194,7 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 			}
 			coins = append(coins, coin)
 		}
-		// TODO consider moving to UpdateCampaign, but not sure, may not be relevant.
+		// TODO consider moving to UpdateProject, but not sure, may not be relevant.
 		// It is better to send multiple message in a single tx too.
 		// consider ways to refactor to accomplish a better API and efficiency.
 
@@ -203,10 +203,10 @@ func (n Network) Publish(ctx context.Context, c Chain, options ...PublishOption)
 			return 0, 0, err
 		}
 
-		msgMintVouchers := campaigntypes.NewMsgMintVouchers(
+		msgMintVouchers := projecttypes.NewMsgMintVouchers(
 			addr,
 			projectID,
-			campaigntypes.NewSharesFromCoins(sdk.NewCoins(coins...)),
+			projecttypes.NewSharesFromCoins(sdk.NewCoins(coins...)),
 		)
 		_, err = n.cosmos.BroadcastTx(ctx, n.account, msgMintVouchers)
 		if err != nil {

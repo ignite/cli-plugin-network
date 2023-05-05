@@ -15,6 +15,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/chaincmd"
 	"github.com/ignite/cli/ignite/pkg/checksum"
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
+	"github.com/ignite/cli/ignite/pkg/cosmosver"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/gitpod"
 	"github.com/ignite/cli/ignite/services/chain"
@@ -329,7 +330,14 @@ func (c *Chain) Build(ctx context.Context, cacheStorage cache.Storage) (binaryNa
 	c.ev.Send("Building the chain's binary", events.ProgressStart())
 
 	// build binary
-	if binaryName, err = c.chain.Build(ctx, cacheStorage, "", true, false); err != nil {
+	if binaryName, err = c.chain.Build(
+		ctx,
+		cacheStorage,
+		[]string{cosmosver.DefaultVersion().String()},
+		"",
+		true,
+		false,
+	); err != nil {
 		return "", err
 	}
 
