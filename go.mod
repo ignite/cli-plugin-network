@@ -6,14 +6,14 @@ require (
 	cosmossdk.io/math v1.0.0
 	github.com/aws/smithy-go v1.13.4
 	github.com/cenkalti/backoff v2.2.1+incompatible
-	github.com/cometbft/cometbft v0.37.0
-	github.com/cosmos/cosmos-sdk v0.47.1
+	github.com/cometbft/cometbft v0.37.1
+	github.com/cosmos/cosmos-sdk v0.47.2
 	github.com/cosmos/ibc-go/v7 v7.0.0
 	github.com/go-git/go-git/v5 v5.5.2
 	github.com/goccy/go-yaml v1.9.7
 	github.com/golangci/golangci-lint v1.50.1
-	github.com/hashicorp/go-plugin v1.4.6
-	github.com/ignite/cli v0.26.2-0.20230504112712-4324e2ff958f
+	github.com/hashicorp/go-plugin v1.4.9
+	github.com/ignite/cli v0.26.2-0.20230508153345-3c8f86cf4352
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
@@ -21,7 +21,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.2
-	github.com/tendermint/spn v0.2.1-0.20230426203353-36c7a9e1c2a4
+	github.com/tendermint/spn v0.2.1-0.20230508163159-3454ba215f9b
 	github.com/vektra/mockery/v2 v2.16.0
 	golang.org/x/sync v0.1.0
 	golang.org/x/tools v0.8.0
@@ -107,7 +107,7 @@ require (
 	github.com/cosmos/btcutil v1.0.5 // indirect
 	github.com/cosmos/cosmos-proto v1.0.0-beta.2 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
-	github.com/cosmos/gogoproto v1.4.7 // indirect
+	github.com/cosmos/gogoproto v1.4.8 // indirect
 	github.com/cosmos/iavl v0.20.0 // indirect
 	github.com/cosmos/ics23/go v0.9.1-0.20221207100636-b1abd8678aab // indirect
 	github.com/cosmos/ledger-cosmos-go v0.12.1 // indirect
@@ -215,7 +215,7 @@ require (
 	github.com/hexops/gotextdiff v1.0.3 // indirect
 	github.com/huandu/skiplist v1.2.0 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
-	github.com/ignite/modules v0.0.0-20230426163137-432873c36327 // indirect
+	github.com/ignite/modules v0.0.0-20230508152414-a0a6b35baeef // indirect
 	github.com/ignite/web v0.4.3 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -341,7 +341,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d // indirect
 	github.com/tdakkota/asciicheck v0.1.1 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
-	github.com/tendermint/fundraising v0.3.2-0.20230426170640-25ca21084e72 // indirect
+	github.com/tendermint/fundraising v0.3.2-0.20230508152400-688a38bcc176 // indirect
 	github.com/tendermint/go-amino v0.16.0 // indirect
 	github.com/tetafro/godot v1.4.11 // indirect
 	github.com/tidwall/btree v1.6.0 // indirect
