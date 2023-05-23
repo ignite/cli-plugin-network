@@ -21,7 +21,7 @@ lint:
 	@echo Running gocilint...
 	@go run github.com/golangci/golangci-lint/cmd/golangci-lint run --out-format=tab --issues-exit-code=0
 
-test: test-unit govet govulncheck
+test: govet test-unit
 
 ## govet: Run go vet.
 govet:
