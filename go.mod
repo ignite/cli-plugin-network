@@ -21,7 +21,7 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.2
-	github.com/tendermint/spn v0.2.1-0.20230508163159-3454ba215f9b
+	github.com/tendermint/spn v0.2.1-0.20230620123646-e5b0863621fe
 	github.com/vektra/mockery/v2 v2.27.1
 	golang.org/x/sync v0.2.0
 	golang.org/x/tools v0.9.1
@@ -212,7 +212,7 @@ require (
 	github.com/hexops/gotextdiff v1.0.3 // indirect
 	github.com/huandu/skiplist v1.2.0 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
-	github.com/ignite/modules v0.0.0-20230508152414-a0a6b35baeef // indirect
+	github.com/ignite/modules v0.0.0-20230619233611-d6fe679c19a7 // indirect
 	github.com/ignite/web v0.4.3 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -334,7 +334,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d // indirect
 	github.com/tdakkota/asciicheck v0.1.1 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c // indirect
-	github.com/tendermint/fundraising v0.3.2-0.20230508152400-688a38bcc176 // indirect
+	github.com/tendermint/fundraising v0.3.2-0.20230613160010-82167449d3a2 // indirect
 	github.com/tendermint/go-amino v0.16.0 // indirect
 	github.com/tetafro/godot v1.4.11 // indirect
 	github.com/tidwall/btree v1.6.0 // indirect
