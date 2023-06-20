@@ -241,7 +241,6 @@ github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnht
 github.com/cockroachdb/apd/v2 v2.0.2 h1:weh8u7Cneje73dDh+2tEVLUvyBc89iwepWCD8b8034E=
 github.com/cockroachdb/apd/v2 v2.0.2/go.mod h1:DDxRlzC2lo3/vSlmSoS7JkqbbrARPuFOGr0B9pvN3Gw=
 github.com/cockroachdb/apd/v3 v3.1.0 h1:MK3Ow7LH0W8zkd5GMKA1PvS9qG3bWFI95WaVNfyZJ/w=
-github.com/coinbase/rosetta-sdk-go v0.8.3 h1:IYqd+Ser5NVh0s7p8p2Ir82iCvi75E1l0NH2H4NEr0Y=
 github.com/coinbase/rosetta-sdk-go/types v1.0.0 h1:jpVIwLcPoOeCR6o1tU+Xv7r5bMONNbHU7MuEHboiFuA=
 github.com/cometbft/cometbft v0.37.1 h1:KLxkQTK2hICXYq21U2hn1W5hOVYUdQgDQ1uB+90xPIg=
 github.com/cometbft/cometbft v0.37.1/go.mod h1:Y2MMMN//O5K4YKd8ze4r9jmk4Y7h0ajqILXbH5JQFVs=
@@ -695,8 +694,8 @@ github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ignite/cli v0.27.0 h1:sQO/oO+EKMe9T/+ST2e70/7sdC+oI6ltX8NSnPiz8hM=
 github.com/ignite/cli v0.27.0/go.mod h1:7uaYQQ07tyOBiVAlRYAcZk2g/Y1vtgU0J09oPNntR4E=
-github.com/ignite/modules v0.0.0-20230508152414-a0a6b35baeef h1:9qlOQ0VwLAoUDCOjqJl8GYwjjIjzK6c5tvAdcI0OV2A=
-github.com/ignite/modules v0.0.0-20230508152414-a0a6b35baeef/go.mod h1:faUluIDKyP0QCQk8FXD1wUkiz757LcUMAylnw4VTNL4=
+github.com/ignite/modules v0.0.0-20230619233611-d6fe679c19a7 h1:XZtKgR/KgkOjyq92QLnm77XtscgTGqPDK/5YzTWsh1E=
+github.com/ignite/modules v0.0.0-20230619233611-d6fe679c19a7/go.mod h1:MdPE33lMAgV2ovGcl9D8bYMsb6Ejoysy+xjri+W3tT4=
 github.com/ignite/web v0.4.3 h1:LHucUEXttzCf5JmxO5/xLKVx1Qz1o124HqF4Nii5uWQ=
 github.com/ignite/web v0.4.3/go.mod h1:WZWBaBYF8RazN7dE462BLpvXDY8ScacxcJ07BKwX/jY=
 github.com/imdario/mergo v0.3.12/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
@@ -1166,12 +1165,12 @@ github.com/tdakkota/asciicheck v0.1.1 h1:PKzG7JUTUmVspQTDqtkX9eSiLGossXTybutHwTX
 github.com/tdakkota/asciicheck v0.1.1/go.mod h1:yHp0ai0Z9gUljN3o0xMhYJnH/IcvkdTBOX2fmJ93JEM=
 github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c h1:g+WoO5jjkqGAzHWCjJB1zZfXPIAaDpzXIEJ0eS6B5Ok=
 github.com/tecbot/gorocksdb v0.0.0-20191217155057-f0fad39f321c/go.mod h1:ahpPrc7HpcfEWDQRZEmnXMzHY03mLDYMCxeDzy46i+8=
-github.com/tendermint/fundraising v0.3.2-0.20230508152400-688a38bcc176 h1:Sw2eXzmQdYGazmQLNhz8M1cpUcRYrnZPK4txJ4pM5EM=
-github.com/tendermint/fundraising v0.3.2-0.20230508152400-688a38bcc176/go.mod h1:9E44UlajzgG/twaK9PmIC6pc296MJe/qqMjrIdpA6x8=
+github.com/tendermint/fundraising v0.3.2-0.20230613160010-82167449d3a2 h1:KAqALUVxB9tT0QeJB4IIwD758BXOT4NTvAomtKwiRHE=
+github.com/tendermint/fundraising v0.3.2-0.20230613160010-82167449d3a2/go.mod h1:34+0Y1lZ7tpmPAiLpWKLZNBDnIEM79dCXgWX9J0l6Sg=
 github.com/tendermint/go-amino v0.16.0 h1:GyhmgQKvqF82e2oZeuMSp9JTN0N09emoSZlb2lyGa2E=
 github.com/tendermint/go-amino v0.16.0/go.mod h1:TQU0M1i/ImAo+tYpZi73AU3V/dKeCoMC9Sphe2ZwGME=
-github.com/tendermint/spn v0.2.1-0.20230508163159-3454ba215f9b h1:XAhGVmjC5CGsZbUZwgq53BBNh3iK3hivTrRLykguqLc=
-github.com/tendermint/spn v0.2.1-0.20230508163159-3454ba215f9b/go.mod h1:6/OAgyFJt2D8nTfUi4lN/Q+G9bKZ04duTlQeSLznGLI=
+github.com/tendermint/spn v0.2.1-0.20230620123646-e5b0863621fe h1:lO2gsTIR2bq6tATylxJNL5DBHoWUTOduFwcKMPj/KLk=
+github.com/tendermint/spn v0.2.1-0.20230620123646-e5b0863621fe/go.mod h1:oS/q6OAGgDrQKy72eioI5tkTJboXOPpvwcbo+Y1TSpU=
 github.com/tenntenn/modver v1.0.1 h1:2klLppGhDgzJrScMpkj9Ujy3rXPUspSjAcev9tSEBgA=
 github.com/tenntenn/modver v1.0.1/go.mod h1:bePIyQPb7UeioSRkw3Q0XeMhYZSMx9B8ePqg6SAMGH0=
 github.com/tenntenn/text/transform v0.0.0-20200319021203-7eef512accb3 h1:f+jULpRQGxTSkNYKJ51yaw6ChIqO+Je8UqsTKN/cDag=
