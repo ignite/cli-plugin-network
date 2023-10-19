@@ -5,25 +5,20 @@ import (
 	"os"
 
 	hplugin "github.com/hashicorp/go-plugin"
-
 	"github.com/ignite/cli/ignite/services/plugin"
 
 	"github.com/ignite/cli-plugin-network/cmd"
 )
 
-type p struct {
-	plugin.Interface
-}
+type app struct{}
 
-func (p) Manifest(_ context.Context) (*plugin.Manifest, error) {
-	m := &plugin.Manifest{
-		Name: "network",
-	}
+func (app) Manifest(context.Context) (*plugin.Manifest, error) {
+	m := &plugin.Manifest{Name: "network"}
 	m.ImportCobraCommand(cmd.NewNetwork(), "ignite")
 	return m, nil
 }
 
-func (p) Execute(_ context.Context, c *plugin.ExecutedCommand) error {
+func (app) Execute(_ context.Context, c *plugin.ExecutedCommand, _ plugin.ClientAPI) error {
 	// Instead of a switch on c.Use, we run the root command like if
 	// we were in a command line context. This implies to set os.Args
 	// correctly.
@@ -33,11 +28,23 @@ func (p) Execute(_ context.Context, c *plugin.ExecutedCommand) error {
 	return cmd.NewNetwork().Execute()
 }
 
+func (app) ExecuteHookPre(context.Context, *plugin.ExecutedHook, plugin.ClientAPI) error {
+	return nil
+}
+
+func (app) ExecuteHookPost(context.Context, *plugin.ExecutedHook, plugin.ClientAPI) error {
+	return nil
+}
+
+func (app) ExecuteHookCleanUp(context.Context, *plugin.ExecutedHook, plugin.ClientAPI) error {
+	return nil
+}
+
 func main() {
 	hplugin.Serve(&hplugin.ServeConfig{
 		HandshakeConfig: plugin.HandshakeConfig(),
 		Plugins: map[string]hplugin.Plugin{
-			"cli-plugin-network": plugin.NewGRPC(&p{}),
+			"cli-plugin-network": plugin.NewGRPC(&app{}),
 		},
 		GRPCServer: hplugin.DefaultGRPCServer,
 	})
