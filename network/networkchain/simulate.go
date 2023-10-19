@@ -132,7 +132,7 @@ func (c Chain) setSimulationConfig() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	genAddr := func(port int) string {
+	genAddr := func(port uint) string {
 		return fmt.Sprintf("localhost:%d", port)
 	}
 
