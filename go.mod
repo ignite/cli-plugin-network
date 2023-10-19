@@ -1,6 +1,6 @@
 module github.com/ignite/cli-plugin-network
 
-go 1.19
+go 1.21
 
 require (
 	cosmossdk.io/math v1.0.1
@@ -13,7 +13,7 @@ require (
 	github.com/goccy/go-yaml v1.9.7
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/hashicorp/go-plugin v1.4.9
-	github.com/ignite/cli v0.27.0
+	github.com/ignite/cli v0.27.2
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
