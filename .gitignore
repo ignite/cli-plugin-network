@@ -1,4 +1,4 @@
-cli-plugin-network
+*.app
 release/
 build/
 .idea/
