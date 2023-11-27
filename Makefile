@@ -2,7 +2,7 @@
 
 build:
 	@echo Building...
-	@go build -o ./cli-plugin-network .
+	@go build -o ./cli-plugin-network.app .
 
 ## mocks: generate mocks
 mocks:
