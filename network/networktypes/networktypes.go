@@ -18,4 +18,7 @@ const (
 
 	// ChainPortID is the chain ibc port id used for the relayer connection.
 	ChainPortID = "monitoringp"
+
+	// DefaultFee is the default fee to use when sending transactions.
+	DefaultFee = "500uspn"
 )
