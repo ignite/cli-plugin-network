@@ -1,4 +1,4 @@
-*.app
+*.ign
 release/
 build/
 .idea/
