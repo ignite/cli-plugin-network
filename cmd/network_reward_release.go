@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"text/tabwriter"
 
@@ -13,7 +14,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/relayer"
 	relayerconf "github.com/ignite/cli/ignite/pkg/relayer/config"
 	"github.com/ignite/cli/ignite/pkg/xurl"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
@@ -63,7 +63,7 @@ func networkRewardRelease(cmd *cobra.Command, args []string) (err error) {
 	defer func() {
 		var accountErr *cosmosaccount.AccountDoesNotExistError
 		if errors.As(err, &accountErr) {
-			err = errors.Wrap(accountErr, `make sure to create or import your account through "ignite account" commands`)
+			err = fmt.Errorf(`make sure to create or import your account through "ignite account" commands: %w`, err)
 		}
 	}()
 

@@ -7,7 +7,7 @@ build:
 ## mocks: generate mocks
 mocks:
 	@echo Generating mocks
-	@go install github.com/vektra/mockery/v2
+	@go install github.com/vektra/mockery/v2@latest
 	@go generate ./...
 
 ## format: Install and run goimports and gofumpt

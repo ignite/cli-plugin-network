@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -10,7 +11,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/gitpod"
 	"github.com/ignite/cli/ignite/pkg/xchisel"
 	"github.com/manifoldco/promptui"
-	"github.com/pkg/errors"
 	"github.com/rdegges/go-ipify"
 	"github.com/spf13/cobra"
 
@@ -164,7 +164,7 @@ func networkChainJoinHandler(cmd *cobra.Command, args []string) error {
 			// account balance set by user
 			amountCoins, err := sdk.ParseCoinsNormalized(amount)
 			if err != nil {
-				return errors.Wrap(err, "error parsing amount")
+				return fmt.Errorf("error parsing amount: %w", err)
 			}
 			joinOptions = append(joinOptions, network.WithAccountRequest(amountCoins))
 		default:
@@ -216,7 +216,7 @@ func askPublicAddress(cmd *cobra.Command, session *cliui.Session) (publicAddress
 	if gitpod.IsOnGitpod() {
 		publicAddress, err = gitpod.URLForPort(ctx, xchisel.DefaultServerPort)
 		if err != nil {
-			return "", errors.Wrap(err, "cannot read public Gitpod address of the node")
+			return "", fmt.Errorf("cannot read public Gitpod address of the node: %w", err)
 		}
 		return publicAddress, nil
 	}

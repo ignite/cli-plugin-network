@@ -2,8 +2,6 @@ package networktypes
 
 import (
 	"fmt"
-
-	"github.com/pkg/errors"
 )
 
 // ErrInvalidRequest is an error returned in methods manipulating requests when they are invalid.
@@ -18,5 +16,5 @@ func (err ErrInvalidRequest) Error() string {
 
 // NewWrappedErrInvalidRequest returns a wrapped ErrInvalidRequest.
 func NewWrappedErrInvalidRequest(requestID uint64, message string) error {
-	return errors.Wrap(ErrInvalidRequest{requestID: requestID}, message)
+	return fmt.Errorf(message+": %w", ErrInvalidRequest{requestID: requestID})
 }

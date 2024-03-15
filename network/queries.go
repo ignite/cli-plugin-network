@@ -2,6 +2,7 @@ package network
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"sort"
 	"sync"
@@ -9,7 +10,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/ignite/cli/ignite/pkg/cosmoserror"
 	"github.com/ignite/cli/ignite/pkg/events"
-	"github.com/pkg/errors"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 	projecttypes "github.com/tendermint/spn/x/project/types"
 	rewardtypes "github.com/tendermint/spn/x/reward/types"
@@ -142,7 +142,7 @@ func (n Network) VestingAccounts(ctx context.Context, launchID uint64) (vestingA
 	for i, acc := range res.VestingAccount {
 		parsedAcc, err := networktypes.ToVestingAccount(acc)
 		if err != nil {
-			return vestingAccs, errors.Wrapf(err, "error parsing vesting account %d", i)
+			return vestingAccs, fmt.Errorf("error parsing vesting account %d: %w", i, err)
 		}
 
 		vestingAccs = append(vestingAccs, parsedAcc)

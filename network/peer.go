@@ -1,10 +1,10 @@
 package network
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
-	"github.com/pkg/errors"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 )
 
