@@ -2,6 +2,8 @@ package network
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"strconv"
 
 	ctypes "github.com/cometbft/cometbft/rpc/core/types"
@@ -13,7 +15,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/xtime"
-	"github.com/pkg/errors"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 	monitoringctypes "github.com/tendermint/spn/x/monitoringc/types"
 	profiletypes "github.com/tendermint/spn/x/profile/types"
@@ -144,7 +145,7 @@ func New(cosmos CosmosClient, account cosmosaccount.Account, options ...Option) 
 func ParseID(id string) (uint64, error) {
 	objID, err := strconv.ParseUint(id, 10, 64)
 	if err != nil {
-		return 0, errors.Wrap(err, "error parsing ID")
+		return 0, fmt.Errorf("error parsing ID: %w", err)
 	}
 	if objID == 0 {
 		return 0, errors.New("ID must be greater than 0")

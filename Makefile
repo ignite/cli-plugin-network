@@ -7,7 +7,7 @@ build:
 ## mocks: generate mocks
 mocks:
 	@echo Generating mocks
-	@go install github.com/vektra/mockery/v2
+	@go install github.com/vektra/mockery/v2@latest
 	@go generate ./...
 
 ## format: Install and run goimports and gofumpt
@@ -18,7 +18,7 @@ format:
 
 ## lint: Run Golang CI Lint.
 lint:
-	@echo Running gocilint...
+	@echo Running golangci-lint...
 	@go run github.com/golangci/golangci-lint/cmd/golangci-lint run --out-format=tab --issues-exit-code=0
 
 test: govet test-unit

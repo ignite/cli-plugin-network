@@ -1,11 +1,11 @@
 package cmd
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/yaml"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
@@ -41,7 +41,7 @@ func networkRequestShowHandler(cmd *cobra.Command, args []string) error {
 	// parse request ID
 	requestID, err := strconv.ParseUint(args[1], 10, 64)
 	if err != nil {
-		return errors.Wrap(err, "error parsing requestID")
+		return fmt.Errorf("error parsing requestID: %w", err)
 	}
 
 	n, err := nb.Network()

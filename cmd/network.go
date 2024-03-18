@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"errors"
+	"fmt"
 	"path/filepath"
 
 	"github.com/ignite/cli/ignite/config"
@@ -10,7 +12,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/gitpod"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 
@@ -203,7 +204,7 @@ func (n NetworkBuilder) Network(options ...network.Option) (network.Network, err
 	if from != "" {
 		account, err = cosmos.AccountRegistry.GetByName(getFrom(n.cmd))
 		if err != nil {
-			return network.Network{}, errors.Wrap(err, "make sure that this account exists, use 'ignite account -h' to manage accounts")
+			return network.Network{}, fmt.Errorf("make sure that this account exists, use 'ignite account -h' to manage accounts: %w", err)
 		}
 	}
 

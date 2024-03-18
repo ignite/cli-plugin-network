@@ -1,10 +1,11 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/numbers"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/ignite/cli-plugin-network/network"
@@ -92,7 +93,7 @@ func networkRequestApproveHandler(cmd *cobra.Command, args []string) error {
 	// if requests must be verified, we simulate the chain in a temporary directory with the requests
 	if !noVerification {
 		if err := verifyRequests(cmd.Context(), cacheStorage, nb, launchID, ids...); err != nil {
-			return errors.Wrap(err, "request(s) not valid")
+			return fmt.Errorf("request(s) not valid: %w", err)
 		}
 		session.Printf("%s Request(s) %s verified\n", icons.OK, numbers.List(ids, "#"))
 	}

@@ -2,6 +2,7 @@ package networkchain
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -14,7 +15,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/httpstatuschecker"
 	"github.com/ignite/cli/ignite/pkg/xurl"
 	"github.com/pelletier/go-toml"
-	"github.com/pkg/errors"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -119,7 +119,7 @@ func (c Chain) simulateChainStart(ctx context.Context) error {
 		if checkValidatorSetEmptyError(err) {
 			err = nil
 		}
-		exit <- errors.Wrap(err, "the chain failed to start")
+		exit <- fmt.Errorf("the chain failed to start: %w", err)
 	}()
 
 	return <-exit

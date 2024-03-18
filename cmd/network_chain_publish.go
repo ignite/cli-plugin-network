@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -8,7 +9,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cliui"
 	"github.com/ignite/cli/ignite/pkg/cliui/icons"
 	"github.com/ignite/cli/ignite/pkg/xurl"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/tendermint/spn/pkg/chainid"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
@@ -131,12 +131,12 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 	// parse the amount.
 	amountCoins, err := sdk.ParseCoinsNormalized(amount)
 	if err != nil {
-		return errors.Wrap(err, "error parsing amount")
+		return fmt.Errorf("error parsing amount: %w", err)
 	}
 
 	accountBalanceCoins, err := sdk.ParseCoinsNormalized(accountBalance)
 	if err != nil {
-		return errors.Wrap(err, "error parsing account balance")
+		return fmt.Errorf("error parsing account balance: %w", err)
 	}
 
 	source, err := xurl.MightHTTPS(args[0])
@@ -169,10 +169,10 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 	if chainID != "" {
 		chainName, _, err := chainid.ParseGenesisChainID(chainID)
 		if err != nil {
-			return errors.Wrapf(err, "invalid chain id: %s", chainID)
+			return fmt.Errorf("invalid chain id: %s: %w", chainID, err)
 		}
 		if err := chainid.CheckChainName(chainName); err != nil {
-			return errors.Wrapf(err, "invalid chain id name: %s", chainName)
+			return fmt.Errorf("invalid chain id name: %s: %w", chainName, err)
 		}
 	}
 
@@ -214,8 +214,7 @@ func networkChainPublishHandler(cmd *cobra.Command, args []string) error {
 
 	// cannot use both genesisURL and genesisConfig
 	if genesisURL != "" && genesisConfig != "" {
-		return errors.New("cannot use both genesis-url and genesis-config for initial genesis." +
-			"Please use only one of the options.")
+		return errors.New("cannot use both genesis-url and genesis-config for initial genesis.\n Please use only one of the options")
 	}
 
 	// use custom genesis from url if given.

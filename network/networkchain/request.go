@@ -6,7 +6,6 @@ import (
 
 	cosmosgenesis "github.com/ignite/cli/ignite/pkg/cosmosutil/genesis"
 	"github.com/ignite/cli/ignite/pkg/events"
-	"github.com/pkg/errors"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
 )
@@ -26,12 +25,12 @@ func (c Chain) CheckRequestChangeParam(
 
 	genesisPath, err := c.chain.GenesisPath()
 	if err != nil {
-		return errors.Wrap(err, "genesis of the blockchain can't be read")
+		return fmt.Errorf("genesis of the blockchain can't be read: %w", err)
 	}
 
 	genesis, err := cosmosgenesis.FromPath(genesisPath)
 	if err != nil {
-		return errors.Wrap(err, "genesis of the blockchain can't be parsed")
+		return fmt.Errorf("genesis of the blockchain can't be parsed: %w", err)
 	}
 
 	pc := []networktypes.ParamChange{

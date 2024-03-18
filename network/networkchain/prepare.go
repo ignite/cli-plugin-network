@@ -14,7 +14,6 @@ import (
 	"github.com/ignite/cli/ignite/pkg/events"
 	"github.com/ignite/cli/ignite/pkg/jsonfile"
 	"github.com/pelletier/go-toml"
-	"github.com/pkg/errors"
 	launchtypes "github.com/tendermint/spn/x/launch/types"
 
 	"github.com/ignite/cli-plugin-network/network/networktypes"
@@ -95,28 +94,28 @@ func (c Chain) buildGenesis(
 
 	addressPrefix, err := c.detectPrefix(ctx)
 	if err != nil {
-		return errors.Wrap(err, "error detecting chain prefix")
+		return fmt.Errorf("error detecting chain prefix: %w", err)
 	}
 
 	// apply genesis information to the genesis
 	if err := c.applyGenesisAccounts(ctx, gi.GenesisAccounts, addressPrefix); err != nil {
-		return errors.Wrap(err, "error applying genesis accounts to genesis")
+		return fmt.Errorf("error applying genesis accounts to genesis: %w", err)
 	}
 	if err := c.applyVestingAccounts(ctx, gi.VestingAccounts, addressPrefix); err != nil {
-		return errors.Wrap(err, "error applying vesting accounts to genesis")
+		return fmt.Errorf("error applying vesting accounts to genesis: %w", err)
 	}
 	if err := c.applyGenesisValidators(ctx, gi.GenesisValidators); err != nil {
-		return errors.Wrap(err, "error applying genesis validators to genesis")
+		return fmt.Errorf("error applying genesis validators to genesis: %w", err)
 	}
 
 	genesisPath, err := c.chain.GenesisPath()
 	if err != nil {
-		return errors.Wrap(err, "genesis of the blockchain can't be read")
+		return fmt.Errorf("genesis of the blockchain can't be read: %w", err)
 	}
 
 	genesis, err := cosmosgenesis.FromPath(genesisPath)
 	if err != nil {
-		return errors.Wrap(err, "genesis of the blockchain can't be parsed")
+		return fmt.Errorf("genesis of the blockchain can't be parsed: %w", err)
 	}
 
 	// update chain ID and launch time
@@ -124,7 +123,7 @@ func (c Chain) buildGenesis(
 		jsonfile.WithKeyValue(cosmosgenesis.FieldChainID, c.id),
 		jsonfile.WithKeyValueTimestamp(cosmosgenesis.FieldGenesisTime, c.launchTime.Unix()),
 	); err != nil {
-		return errors.Wrap(err, "genesis cannot be updated")
+		return fmt.Errorf("genesis cannot be updated: %w", err)
 	}
 
 	// update reward related fields if the testnet is incentivized (with a last block height for reward distribution)
@@ -138,7 +137,7 @@ func (c Chain) buildGenesis(
 			jsonfile.WithKeyValueInt(cosmosgenesis.FieldConsumerUnbondingPeriod, consumerUnbondingTime),
 			jsonfile.WithKeyValueUint(cosmosgenesis.FieldConsumerRevisionHeight, rewardsInfo.RevisionHeight),
 		); err != nil {
-			return errors.Wrap(err, "genesis cannot be updated for reward related fields")
+			return fmt.Errorf("genesis cannot be updated for reward related fields: %w", err)
 		}
 	}
 
@@ -265,7 +264,7 @@ func applyParamChanges(
 	}
 
 	if err := genesis.Update(changes...); err != nil {
-		return errors.Wrap(err, "failed to apply param change to genesis")
+		return fmt.Errorf("failed to apply param change to genesis: %w", err)
 	}
 
 	return nil
@@ -279,7 +278,7 @@ func (c Chain) updateConfigFromGenesisValidators(genesisVals []networktypes.Gene
 	)
 	for i, val := range genesisVals {
 		if !networktypes.VerifyPeerFormat(val.Peer) {
-			return errors.Errorf("invalid peer: %s", val.Peer.Id)
+			return fmt.Errorf("invalid peer: %s", val.Peer.Id)
 		}
 		switch conn := val.Peer.Connection.(type) {
 		case *launchtypes.Peer_TcpAddress:
@@ -309,9 +308,6 @@ func (c Chain) updateConfigFromGenesisValidators(genesisVals []networktypes.Gene
 			return err
 		}
 		configToml.Set("p2p.persistent_peers", strings.Join(p2pAddresses, ","))
-		if err != nil {
-			return err
-		}
 
 		// if there are tunneled peers they will be connected with tunnel clients via localhost,
 		// so we need to allow to have few nodes with the same ip
